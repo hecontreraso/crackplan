@@ -42,7 +42,7 @@
                 <p><%= event.details %></p>
               </div>
               <%= event.users.collect { |user| user.full_name } %> are going<br>
-              <%= event.where %> | <%= event.date %> <%= event.get_time %>
+              <%= event.where %> | <%= event.date %> <%= event.time %>
  
               <div class="card-action center-align">
                 <!-- <button id="btnGoing" class="btn waves-effect waves-light" type="submit" name="action">Going -->
