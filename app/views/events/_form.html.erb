@@ -17,6 +17,8 @@
 
   <%= f.time_select :time, { :default => Time.now.change(:hour => 12), :simple_time_select => true, :minute_interval => 30} %>
 
+  <%= f.file_field :image %>
+
   <br>
   <%= f.submit %>
 

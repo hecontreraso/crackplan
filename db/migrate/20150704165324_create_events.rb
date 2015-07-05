@@ -7,7 +7,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :scope, 		null: false, default: ""
       t.date :date,       null: false
       t.time :time,			  null: true
-      t.string :photo
+      t.string :image,    null: true
     end
   end
 end

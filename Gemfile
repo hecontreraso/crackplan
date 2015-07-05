@@ -26,8 +26,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # For auth system
 gem 'devise'
 
-# Gem for file upload
-gem 'paperclip', '~> 4.1'
+# for aws cloud storage
+gem 'fog'
+# photo resizing
+gem "mini_magick"
+# file upload solution
+gem 'carrierwave'
+
+# Secrets management
+gem "figaro", "~> 0.7.0"
 
 # For select hour component
 #gem 'simple_time_select', :git => 'https://github.com/tamoyal/simple_time_select.git'

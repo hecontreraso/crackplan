@@ -21,6 +21,8 @@
         <br>
         <%= event.creator_name %>
         <br>
+        <%= image_tag(event.image.small)%>
+        <br>
         <%= event.details %>
         <br>
         <%= event.users.collect { |user| user.full_name } %>
