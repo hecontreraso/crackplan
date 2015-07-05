@@ -3,6 +3,9 @@ class Event < ActiveRecord::Base
 	has_many :assistants
 	has_many :users, through: :assistants	
 
+	has_attached_file :image, :styles => { :medium => "940x640>", :thumb => "320x240#" }, :default_url => "/images/:style/missing.png"
+  	validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+
 	attr_accessor :tag
 
 	#Returns how long ago the event was created

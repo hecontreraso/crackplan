@@ -26,6 +26,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # For auth system
 gem 'devise'
 
+# Gem for file upload
+gem 'paperclip', '~> 4.1'
+
 # For select hour component
 #gem 'simple_time_select', :git => 'https://github.com/tamoyal/simple_time_select.git'
 
