@@ -21,7 +21,7 @@
         </div>
         <%= event.users.collect { |user| user.full_name } %>
         <br>
-        <%= event.where %> | <%= event.date %> at <%= event.get_time %>
+        <%= event.where %> | <%= event.date %> at <%= event.time %>
         <div class="card-action center-align">
           <% if user_signed_in?%>
             <%= button_to event.tag, join_event_path(event), method: :post, id: "btnGoing", class: "btn waves-effect waves-light bordeSolidoNegro" %>
