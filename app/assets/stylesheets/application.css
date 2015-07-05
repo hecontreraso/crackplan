@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+textarea{
+  color: white !important;
+}
+
+input[type=text]{
+  color: white !important;
+}
+
+input[type=date]{
+  color: white !important;
+}

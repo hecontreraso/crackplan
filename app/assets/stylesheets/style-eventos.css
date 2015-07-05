@@ -1,5 +1,17 @@
 *{margin: 0 auto;}
 
+textarea{
+  color: white !important;
+}
+
+input[type=text]{
+  color: white !important;
+}
+
+input[type=date]{
+  color: white !important;
+}
+
 #fondoGris
 {
 	background-color: #eeeeee;
