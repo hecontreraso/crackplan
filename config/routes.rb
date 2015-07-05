@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :events, except: [:new]
+
+  root 'events#index'
+
+  post '/events/:id/join' => 'events#join', as: :join_event
+  get '/profile' => 'profile#index', as: :profile
+
+  devise_for :users, controllers: { registrations: 'registrations' }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

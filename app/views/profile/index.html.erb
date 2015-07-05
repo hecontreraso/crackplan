@@ -1,0 +1,31 @@
+<br>	
+
+<%= @user.full_name %>
+
+<br>
+
+<%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
+
+<br>
+<br>
+
+<% @events.each do |event| %>
+
+  <%= event.creator_name %>
+  <br>
+  <%= event.details %>
+  <br>
+  <%= event.users.collect { |user| user.full_name } %>
+  <br>
+  <%= event.where %>
+  <br>
+  <%= event.date %>
+  <br>
+  <%= event.get_time %>
+  <br>
+  <% if user_signed_in?%>
+    <%= link_to event.tag, join_event_path(event), method: :post %>
+  <% end %>
+  <br>
+  <br>
+<% end %>

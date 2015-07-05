@@ -1,0 +1,23 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.text_field :details, placeholder: 'Details' %>
+  <%= f.text_field :where, placeholder: 'Where' %>
+  <%= f.date_field(:date, min: Date.today) %>
+
+  <%= f.time_select :time, { :default => Time.now.change(:hour => 12), :simple_time_select => true, :minute_interval => 30} %>
+
+  <br>
+  <%= f.submit %>
+
+<% end %>
