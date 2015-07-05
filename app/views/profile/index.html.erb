@@ -10,7 +10,6 @@
 <br>
 
 <% @events.each do |event| %>
-
   <%= event.creator_name %>
   <br>
   <%= event.details %>
@@ -18,7 +17,7 @@
   <%= event.users.collect { |user| user.full_name } %>
   <br>
   <%= event.where %>
-  <br>
+  <br> 
   <%= event.date %>
   <br>
   <%= event.get_time %>
