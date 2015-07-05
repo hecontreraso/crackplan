@@ -1,26 +1,80 @@
-<h2>Log in</h2>
+<%= stylesheet_link_tag "landing"%>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+  <div class="row">
+    <div class="col s10 m10 l10 offset-l1">
+      <div class="col s12 m12 l12 separadores120" ></div>
+      <div class="col s12 m12 l12 section scrollspy">
+        <img class="responsive-img" src="https://s3.amazonaws.com/crankplan-p/crackplan_logo.png">
+      </div>
+      <div class="col s12 m12 l12 separadores60" ></div>
+      <div class="col s12 m12 l12">
+        <div class="row">
+          <div id="divTextoLogin" class="col s612 m6 l6">
+            <div id="textoLogin">
+                <h4>Don't have friends that <br />
+                  you don't want to have <br />
+                  in this social network, <br />
+                </h4>
+                <h5>Welcome the new private social network to share events <br />
+                    with you closest friends!
+                </h5>
+            </div>
+              <h6>P.S. Say goodbye to privacy issues</h6>               
+          </div>
+          <div class="col s612 m6 l6">
+            <div class="row">
+              <div class="col s4 m4 l12">
+  <!--               <a class="waves-effect waves-light btn disable">Sign in</a>
+                <span> or </span>  -->
+                <%= link_to "Sign up", new_user_registration_path, class: "waves-effect waves-light btn" %>
+                <!-- <a href="registro.html" class="waves-effect waves-light btn">Sign up</a> -->
+              </div>
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "col s12") do |f| %>
+                    <div class="row">
+                      <div class="input-field col s12 m6 l6">
+                        <%= f.email_field :email, autofocus: true, class: "validate" %>
+                        <%= f.label :email %>
+                      </div>
+                      <div class="input-field col s12 m6 l6">
+                        <%= f.password_field :password, autocomplete: "off" %>
+                        <%= f.label :password %>
+                      </div>
+                    </div>
+                      <% if devise_mapping.rememberable? -%>
+                        <%= f.check_box :remember_me %>
+                        <%= f.label :remember_me %>
+                      <% end %>
+                    <%= f.submit "Log in", class: "btn" %>
+                  <% end %>                 
+                <!-- <button id="btnLogin" class="btn waves-effect waves-light" type="submit" name="action">Sign in</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m12 l12 separadores60" ></div>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+  <footer>
+    <nav>
+      <div class="nav-wrapper">      
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="rigth hide-on-med-and-down">
+          <li><a href="about.html">About</a></li>
+          <li><a href="terms.html">Terms</a></li>
+          <li><a href="helps.html">Helps</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="helps.html">About</a></li>
+          <li><a href="Terms.html">Terms</a></li>
+          <li><a href="Helps.html">Helps</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </footer>
+
+<script type="text/javascript">
+  $(".button-collapse").sideNav();
+</script>

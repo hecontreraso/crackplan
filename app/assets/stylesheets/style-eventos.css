@@ -1,0 +1,24 @@
+*{margin: 0 auto;}
+
+#fondoGris
+{
+	background-color: #eeeeee;
+}
+
+.separadores
+{
+	height: 60px;
+}
+
+.bordeSolidoNegro
+{
+	background: transparent;
+	color: #000;
+	border: 1px solid;
+}
+
+#barraNavegacion, nav
+{
+	background: transparent;
+	color: #fff;
+}

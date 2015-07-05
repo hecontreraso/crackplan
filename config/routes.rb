@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
   resources :events, except: [:new]
-  devise_for :users
 
-  root 'events#index'
+  devise_for :users
+  devise_scope :user do
+    authenticated :user do
+      root :to => 'events#index', as: :authenticated_root
+    end
+    unauthenticated :user do
+      root :to => 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
 
   post '/events/:id/join' => 'events#join', as: :join_event
   get '/profile' => 'profile#index', as: :profile

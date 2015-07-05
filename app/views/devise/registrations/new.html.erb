@@ -1,5 +1,66 @@
-<h2>Sign up</h2>
+<%= stylesheet_link_tag "landing"%>
 
-<%= render 'form' %>
+<div class="row">
+	<div class="col s10 m10 l10 offset-l1">
+		<div class="col s12 m12 l12 separadores120" ></div>
+		<div class="col s12 m12 l12 section scrollspy">
+			<img class="responsive-img" src="https://s3.amazonaws.com/crankplan-p/crackplan_logo.png">
+		</div>
+		<div class="col s12 m12 l12 separadores60" ></div>
+		<div class="col s12 m12 l12">
+			<div class="row">
+				<div id="divTextoLogin" class="col s612 m6 l6">
+					<div id="textoLogin">
+					    <h4>Don't have friends that <br />
+					    	you don't want to have <br />
+					    	in this social network, <br />
+					    </h4>
+					    </h5>Welcome the new preivate social network to share events <br />
+					      	with you closest friends!
+					    </h5>
+					</div>
+				    <h6>P.S. Say goodbye to privacy issues</h6>						    
+				</div>
+				<div class="col s612 m6 l6">
+					<div class="row">
+						<div class="col s4 m4 l12">
+			                <%= link_to "Sign in", new_user_session_path, class: "waves-effect waves-light btn" %>
+						</div>
+						<div>
+							<%= render 'form' %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col s12 m12 l12 separadores60" ></div>
+	</div>
+</div>
 
-<%= render "devise/shared/links" %>
+<footer>
+	<nav>
+		<div class="nav-wrapper">      
+			<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+			<ul class="rigth hide-on-med-and-down">
+				<li><a href="about.html">About</a></li>
+				<li><a href="terms.html">Terms</a></li>
+				<li><a href="helps.html">Helps</a></li>
+				<li><a href="contact.html">Contact</a></li>
+			</ul>
+			<ul class="side-nav" id="mobile-demo">
+				<li><a href="helps.html">About</a></li>
+				<li><a href="Terms.html">Terms</a></li>
+				<li><a href="Helps.html">Helps</a></li>
+				<li><a href="Contact.html">Contact</a></li>
+			</ul>
+			</div>
+		</nav>
+</footer>
+        
+<script type="text/javascript">
+	$(".button-collapse").sideNav();
+	$('.datepicker').pickadate({
+		selectMonths: true, // Creates a dropdown to control month
+		selectYears: 15 // Creates a dropdown of 15 years to control year
+	});
+</script>

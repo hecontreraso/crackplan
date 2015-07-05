@@ -1,30 +1,67 @@
-<br>	
+<link type="text/css" rel="stylesheet" href="assets/style-eventos.css" />
+<div class="row">
+  
+  <div class="col s12 m12 l12 separadores"></div>
+    <div>
+      <div class="row">
+          <div class="col s8 m8 l8 offset-s2 offset-m2 offset-l2 center-align bordeSolidoNegro">
+            <div>
+              <br />
+              <img class="reponsive-img left" src="https://s3.amazonaws.com/crankplan-p/perfil.jpg" />
+              <div class="row">
+                <div class="left offset-s1 offset-m1 offset-l1">
+                  <br />
+                  <p class="left"><%= @user.full_name %></p>
+                <div/>
+              </div>
+            <div class="row">
+              <div class="left col l12 offset-s1 offset-m1 offset-l1">
+                <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<%= @user.full_name %>
+      <!-- estos es la estructura de eventos que se repite desde el backend -->
+      <!-- Evento 1 -->
+      <% @events.each do |event| %>
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="row">
+              <div class="col s12 m12 l12">
+                <h5 class="left"><%= event.creator_name %></h5>
+                <span class="s1 m1 l1 right">hora</span>
+              </div>
+              <div class="card-image">
+                <%= image_tag(event.image.small)%>
+                <span class="card-title">Card Title</span>
+              </div>
+              <div class="card-content">
+                <p><%= event.details %></p>
+              </div>
+              <%= event.users.collect { |user| user.full_name } %> are going<br>
+              <%= event.where %> | <%= event.date %> <%= event.get_time %>
+ 
+              <div class="card-action center-align">
+                <!-- <button id="btnGoing" class="btn waves-effect waves-light" type="submit" name="action">Going -->
+                <!-- </button> -->
+                <% if user_signed_in?%>
+                  <%= link_to event.tag, join_event_path(event), method: :post, id:"btnGoing", class: "btn waves-effect waves-light" %>
+                <% end %> 
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
-<br>
-
-<%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
-
-<br>
-<br>
-
-<% @events.each do |event| %>
-  <%= event.creator_name %>
-  <br>
-  <%= event.details %>
-  <br>
-  <%= event.users.collect { |user| user.full_name } %>
-  <br>
-  <%= event.where %>
-  <br> 
-  <%= event.date %>
-  <br>
-  <%= event.get_time %>
-  <br>
-  <% if user_signed_in?%>
-    <%= link_to event.tag, join_event_path(event), method: :post %>
-  <% end %>
-  <br>
-  <br>
-<% end %>
+    </div>
+  </div>
+</div>
+  <script type="text/javascript">
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
+  </script>

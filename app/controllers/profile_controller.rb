@@ -2,6 +2,8 @@ class ProfileController < ApplicationController
 
 	before_action :authenticate_user!
 
+	layout "internal"
+
 	# GET /events
 	# GET /events.json
 	def index

@@ -37,7 +37,7 @@ gem 'carrierwave'
 gem "figaro", "~> 0.7.0"
 
 # For select hour component
-#gem 'simple_time_select', :git => 'https://github.com/tamoyal/simple_time_select.git'
+#gem 'simple_time_select'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
