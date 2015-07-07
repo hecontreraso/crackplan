@@ -8,6 +8,7 @@ class CreateEvents < ActiveRecord::Migration
       t.date :date,       null: false
       t.time :time,			  null: true
       t.string :image,    null: true
+      t.integer :creator_id
     end
   end
 end

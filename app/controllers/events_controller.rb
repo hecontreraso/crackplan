@@ -10,11 +10,11 @@ class EventsController < ApplicationController
     assistant = Assistant.find_by(event_id: @event.id, user_id: current_user.id)
   
     if assistant
-      if assistant.role != "C"
+      if @event.creator != current_user
         assistant.destroy
       end
     else
-      Assistant.create(event_id: @event.id, user_id: current_user.id, role: "A")
+      Assistant.create(event_id: @event.id, user_id: current_user.id)
     end
 
     # Returns to referer page
@@ -57,10 +57,11 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+    @event.creator = current_user
 
     respond_to do |format|
       if @event.save
-        Assistant.create(user_id: current_user.id, event_id: @event.id, role: "C") # C for creator
+        Assistant.create(user_id: current_user.id, event_id: @event.id) # C for creator
         format.html { redirect_to events_path}
         format.json { render :show, status: :created, location: @event }
       else

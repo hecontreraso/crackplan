@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   	has_many :assistants 
   	has_many :events, through: :assistants
 
-	# enum gender: [ :Mujer, :Hombre ]
+	has_many :created_events, :class_name => "Event", :foreign_key => "creator_id"
 
   	#Returns the user full name
 	def full_name

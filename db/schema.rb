@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20150704231130) do
   create_table "assistants", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "event_id"
-    t.string   "role",       default: "A", null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.date     "joined_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "assistants", ["event_id"], name: "index_assistants_on_event_id", using: :btree
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150704231130) do
     t.date     "date",                    null: false
     t.time     "time"
     t.string   "image"
+    t.integer  "creator_id"
   end
 
   create_table "users", force: :cascade do |t|

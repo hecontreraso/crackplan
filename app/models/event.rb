@@ -1,7 +1,8 @@
 class Event < ActiveRecord::Base
 
 	has_many :assistants
-	has_many :users, through: :assistants	
+	has_many :users, through: :assistants
+	belongs_to :creator, :class_name => "User"
 
 	attr_accessor :tag
 	# Avatar uploader using carrierwave
@@ -18,12 +19,6 @@ class Event < ActiveRecord::Base
 		else 
 		  return ">1w"
 		end
-	end
-
-	def creator_name
-		user_id = assistants.find_by(role: 'C').user_id
-		user = User.find(user_id)
-		return user.full_name
 	end
 
 	def is_current_user_going?(user_id)
