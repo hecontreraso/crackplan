@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20150704231130) do
   create_table "assistants", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "event_id"
-    t.date     "joined_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
