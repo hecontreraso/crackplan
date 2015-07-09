@@ -19,6 +19,7 @@ Event.create(creator_id: 2, image: "5.jpg", details: "Food, Friends, Football an
 Event.create(creator_id: 3, image: "6.jpg", details: "HEY~My friend! June 10 is my birthday,I want to invite u guys to my BD party this Saturday. Come to celebrate with me,I'm really happy to see u on my BD party!", where: "Empire State Building 75th floor", date: Date.new(2015, 11, 17), time: Time.new(2015, 7, 5, 12, 30, 0))
 Event.create(creator_id: 4, image: "7.jpg", details: "Sakura Matsuri, is a 2 day event, the annual cherry blossom festival at BBG, offers over 60 events and performances that celebrate traditional and contemporary Japanese culture. The festival marks the end of Hanami, the Japanese cultural tradition of enjoying each moment of the cherry blossom season.", where: "Brooklyn Botanic Garden 990 Washington Ave, Brooklyn, New York 11225", date: Date.new(2015, 5, 25), time: Time.new(2015, 7, 5, 10, 0, 0))
 
+
 Assistant.create(event_id: 1, user_id: 1)
 Assistant.create(event_id: 3, user_id: 1)
 Assistant.create(event_id: 6, user_id: 2)

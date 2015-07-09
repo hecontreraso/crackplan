@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  # before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:join, :edit, :create, :update, :destroy]
   layout "internal"
 
   # POST /events/:id/join
@@ -26,16 +26,12 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @event = Event.new
-    @events = Event.all
+    @events = Event.all.decorate
 
     @events.collect do |event|
+      event.creator = UserDecorator.new(event.creator)
       user_id = current_user.id if current_user
-
-      if event.is_current_user_going?(user_id)
-        event.tag = "Going"
-      else
-        event.tag = "Join"
-      end
+      event.tag = event.is_current_user_going?(user_id) ? "Going" : "Join"
     end
   end
 
@@ -43,11 +39,6 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
   end
-
-  # # GET /events/new
-  # def new
-  #   @event = Event.new
-  # end
 
   # GET /events/1/edit
   def edit
@@ -61,7 +52,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        Assistant.create(user_id: current_user.id, event_id: @event.id) # C for creator
+        Assistant.create(user_id: current_user.id, event_id: @event.id)
         format.html { redirect_to events_path}
         format.json { render :show, status: :created, location: @event }
       else

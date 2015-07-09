@@ -23,9 +23,12 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# Add a comment summarizing the current schema to the top of models
+gem 'annotate', '~> 2.6.6'
 # For auth system
 gem 'devise'
-
+# For decorators
+gem 'draper'
 # for aws cloud storage
 gem 'fog'
 # photo resizing

@@ -18,6 +18,12 @@
     <%= f.date_select(:birthdate, nidea: :quevaaqui, start_year: Date.current().year, end_year: 1915, prompt: { day: 'Day', month: 'Month', year: 'Year' } ) %>
   </div>
 
+  <div class="field">
+    <%= f.radio_button(:gender, "Male") %>
+    <%= label_tag(:age_male, "Male") %>
+    <%= f.radio_button(:gender, "Female") %>
+    <%= label_tag(:age_female, "Female") %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />

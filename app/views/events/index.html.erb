@@ -2,40 +2,19 @@
   <%= render 'form' %>
 <% end %>
 
-<link type="text/css" rel="stylesheet" href="assets/style-eventos.css" />
-
 <% @events.each do |event| %>
-  <div class="col s12 m6 l4">
-    <div class="card">
-      <div class="row">
-        <div class="col s12 m12 l12">
-          <h5 class="left"><%= event.creator.full_name %></h5>
-          <span class="s1 m1 l1 right"><%= event.time_created %></span>
-        </div>
-        <div class="card-image">
-          <%= image_tag(event.image.small)%>
-          <span class="card-title">Card Title</span>
-        </div>
-        <div class="card-content">
-          <p><%= event.details %></p>
-        </div>
-        <%= event.users.collect { |user| user.full_name } %>
-        <br>
-        <%= event.where %> | <%= event.date %> at <%= event.time %>
-        <div class="card-action center-align">
-          <% if user_signed_in?%>
-            <%= button_to event.tag, join_event_path(event), method: :post, id: "btnGoing", class: "btn waves-effect waves-light bordeSolidoNegro" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= event.creator.full_name %>
+  <%= event.time_created %>
+  <br>
+  <%= image_tag(event.image.small)%><br>
+  <%= event.details %>
+  <br>
+  <%= event.users.collect { |user| user.full_name } %>
+  <br>
+  <%= event.where %> | <%= event.friendly_date %> at <%= event.friendly_hour %>
+  <% if user_signed_in?%>
+    <%= button_to event.tag, join_event_path(event), method: :post %>
+  <% end %>
+  <br>
+  <br>
 <% end %>
-         
-<!-- código Javascript para la página -->
-<script type="text/javascript">
-  $('.datepicker').pickdate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-  });
-</script>
