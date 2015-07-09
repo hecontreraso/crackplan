@@ -1,40 +1,15 @@
-<%= stylesheet_link_tag "landing"%>
+<img src="https://s3.amazonaws.com/crankplan-p/crackplan_logo.png">
 
-<div class="row">
-	<div class="col s10 m10 l10 offset-l1">
-		<div class="col s12 m12 l12 separadores120" ></div>
-		<div class="col s12 m12 l12 section scrollspy">
-			<img class="responsive-img" src="https://s3.amazonaws.com/crankplan-p/crackplan_logo.png">
-		</div>
-		<div class="col s12 m12 l12 separadores60" ></div>
-		<div class="col s12 m12 l12">
-			<div class="row">
-				<div id="divTextoLogin" class="col s612 m6 l6">
-					<div id="textoLogin">
 <h3>Make events faster <br />
-                  with your real friends <br />
-                </h3>
-					    </h5>Welcome the new private social network to share events <br />
-					      	with you closest friends!
-					    </h5>
-					</div>
-				    <h6>P.S. Say goodbye to privacy issues</h6>						    
-				</div>
-				<div class="col s612 m6 l6">
-					<div class="row">
-						<div class="col s4 m4 l12">
-			                <%= link_to "Sign in", new_user_session_path, class: "waves-effect waves-light btn" %>
-						</div>
-						<div>
-							<%= render 'form' %>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col s12 m12 l12 separadores60" ></div>
-	</div>
-</div>
+with your real friends <br />
+</h3>
+</h5>Welcome the new private social network to share events <br />
+with you closest friends!
+</h5>
+<h6>P.S. Say goodbye to privacy issues</h6>
+
+<%= link_to "Sign in", new_user_session_path, class: "waves-effect waves-light btn" %>
+<%= render 'form' %>
 
 <footer>
 	<nav>
@@ -55,11 +30,3 @@
 			</div>
 		</nav>
 </footer>
-        
-<script type="text/javascript">
-	$(".button-collapse").sideNav();
-	$('.datepicker').pickadate({
-		selectMonths: true, // Creates a dropdown to control month
-		selectYears: 15 // Creates a dropdown of 15 years to control year
-	});
-</script>
