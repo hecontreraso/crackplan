@@ -47,6 +47,8 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    event_params[:time] = event_params[:time].to_time
+
     @event = Event.new(event_params)
     @event.creator = current_user
 
