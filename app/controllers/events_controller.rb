@@ -31,7 +31,7 @@ class EventsController < ApplicationController
     @events.collect do |event|
       event.creator = UserDecorator.new(event.creator)
       user_id = current_user.id if current_user
-      event.tag = event.is_current_user_going?(user_id) ? "Going" : "Join"
+      event.going_or_join = event.is_current_user_going?(user_id) ? "Going" : "Join"
     end
   end
 
@@ -58,7 +58,7 @@ class EventsController < ApplicationController
         format.html { redirect_to events_path}
         format.json { render :show, status: :created, location: @event }
       else
-        format.html { render :new }
+        format.html { redirect_to events_path }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
