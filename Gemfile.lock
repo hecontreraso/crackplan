@@ -279,7 +279,6 @@ DEPENDENCIES
   annotate (~> 2.6.6)
   byebug
   carrierwave
-  coffee-rails (~> 4.1.0)
   devise
   draper
   figaro (~> 0.7.0)
