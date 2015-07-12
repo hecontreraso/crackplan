@@ -17,7 +17,7 @@ class EventDecorator < Draper::Decorator
   end
 
   def friendly_hour
-    time.strftime("%l:%M%P")
+    time.strftime("%l:%M%P") unless time.nil?
   end
 
   #Returns how long ago the event was created

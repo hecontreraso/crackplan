@@ -13,7 +13,7 @@
   <br>
   <%= f.date_field(:date, min: Date.today) %>
   <br>
-  <%= f.time_select :time, { ampm: true, minute_step: 15 } %>
+  <%= f.text_field :time %>
   <br>
   <%= f.file_field :image %>
   <br>

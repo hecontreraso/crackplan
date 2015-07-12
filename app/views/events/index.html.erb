@@ -13,7 +13,7 @@
   <br>
   <%= event.where %> | <%= event.friendly_date %> at <%= event.friendly_hour %>
   <% if user_signed_in?%>
-    <%= button_to event.tag, join_event_path(event), method: :post %>
+    <%= button_to event.going_or_join, join_event_path(event), method: :post %>
   <% end %>
   <br>
   <br>

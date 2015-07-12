@@ -15,9 +15,9 @@ class ProfileController < ApplicationController
 	    user_id = current_user.id if current_user
 
   	  if event.is_current_user_going?(user_id)
-	    	event.tag = "Going"
+	    	event.going_or_join = "Going"
 	  	else
-	    	event.tag = "Join"
+	    	event.going_or_join = "Join"
 	  	end
 		end
 	end

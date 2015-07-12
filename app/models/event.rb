@@ -20,7 +20,10 @@ class Event < ActiveRecord::Base
 	has_many :users, through: :assistants
 	belongs_to :creator, :class_name => "User"
 
-	attr_accessor :tag
+	validates :creator_id, presence: true
+	validates :date, presence: true, timeliness: { type: :date, after: Date.today, after_message: "Events can only be created from tomorrow" }
+
+	attr_accessor :going_or_join
 	# Avatar uploader using carrierwave
   mount_uploader :image, EventImageUploader
 
