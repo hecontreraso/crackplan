@@ -11,6 +11,7 @@ class ProfileController < ApplicationController
 		@events = @user.events.decorate
 		
 		@events.collect do |event|
+
 			event.creator = UserDecorator.new(event.creator)
 	    user_id = current_user.id if current_user
 
@@ -19,6 +20,7 @@ class ProfileController < ApplicationController
 	  	else
 	    	event.going_or_join = "Join"
 	  	end
+	  	
 		end
 	end
 

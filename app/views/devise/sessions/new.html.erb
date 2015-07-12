@@ -20,7 +20,57 @@
 
 <br>
 
-<%= render "devise/registrations/form" %>
+<p id="notice"><%= notice %></p>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :birthdate %><br />
+    <%= f.date_select(:birthdate, nidea: :quevaaqui, start_year: Date.current().year, end_year: 1915, prompt: { day: 'Day', month: 'Month', year: 'Year' } ) %>
+  </div>
+
+  <div class="field">
+    <%= f.radio_button(:gender, "Male") %>
+    <%= label_tag(:age_male, "Male") %>
+    <%= f.radio_button(:gender, "Female") %>
+    <%= label_tag(:age_female, "Female") %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @validatable %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+
 
 <footer>
   <nav>
