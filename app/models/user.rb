@@ -19,6 +19,7 @@
 #  last_name              :string
 #  birthdate              :date
 #  gender                 :string
+#  image                  :string
 #
 
 class User < ActiveRecord::Base
@@ -31,6 +32,9 @@ class User < ActiveRecord::Base
 	has_many :events, through: :assistants
 
 	has_many :created_events, :class_name => "Event", :foreign_key => "creator_id"
+
+	# Avatar uploader using carrierwave
+  mount_uploader :image, UserImageUploader
 
 	# validates :first_name, presence: true, length: { maximum: 35 }
 	# validates :last_name, presence: true, length: { maximum: 35 }

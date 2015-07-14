@@ -1,3 +1,4 @@
+<%= image_tag(@user.image.small)%><br>
 <%= @user.full_name %>
 <%= link_to 'Edit profile', edit_user_registration_path %>
 <div hidden id="is_current_user_profile"><%= @is_current_user_profile %></div>
