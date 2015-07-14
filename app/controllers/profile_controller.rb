@@ -19,7 +19,9 @@ class ProfileController < ApplicationController
 	# GET /events
 	# GET /events.json
 	def index
-		@user = current_user.decorate
+		@user = set_user.decorate
+		@is_current_user_profile = (@user.id == current_user.id) ? true : false
+
 		@events = @user.events.decorate
 		
 		@events.collect do |event|
@@ -35,5 +37,10 @@ class ProfileController < ApplicationController
 	  	
 		end
 	end
+
+	private
+		def set_user
+			@user = User.find(params[:id])
+		end
 
 end

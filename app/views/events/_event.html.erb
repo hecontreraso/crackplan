@@ -1,5 +1,6 @@
 <article id="<%= event.id %>" >
-  <%= event.creator.full_name %>
+  <%= link_to event.creator.full_name, profile_path(event.creator) %>
+
   <%= event.time_created %>
   <br>
   <%= image_tag(event.image.small)%><br>
@@ -9,9 +10,9 @@
   <br>
   <%= event.where %> | <%= event.friendly_date %> at <%= event.friendly_hour %>
   <br>
-  <% if user_signed_in?%>
-    <%= link_to event.going_or_join, join_event_from_events_path(event), remote: true, method: :post %>
+  <% if user_signed_in? && event.creator != current_user %>
+    <span class="join_event"><%= event.going_or_join %></span>
   <% end %>
+  <br>
+  <br>
 </article>
-<br>
-<br>

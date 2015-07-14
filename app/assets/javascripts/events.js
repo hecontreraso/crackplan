@@ -3,19 +3,24 @@
 var ready;
 ready = function() {
 
-	// Shared methods with profile
-	$("a[data-remote]").on("ajax:success", function(event, data, status, xhr){
-		if( $(event.target).text() == "Going" ){
-			$(event.target).text("Join");
-		}
-		else{
-			$(event.target).text("Going");	
-		}
-	});
+	$(".join_event").click(function(){
 
-	$("a[data-remote]").on("ajax:error", function(event, data, status, xhr){
-		alert("error");
-	});	
+		var join_button = $(event.target);
+		var id = join_button.closest("article").attr("id");
+    
+    $.post("/events/" + id + "/join", function(data, status){
+
+			if (data.state_changed == "changed"){
+				if( join_button.text() == "Going" ){
+					join_button.text("Join");
+				}
+				else{
+					join_button.text("Going");	
+				}
+			}
+    
+    }, "json");
+	});
 
 };
 

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   post '/events/:id/join' => 'events#join', as: :join_event_from_events
   post '/profile/events/:id/join' => 'profile#join', as: :join_event_from_profile
-  get '/profile' => 'profile#index', as: :profile
+  get '/profile/:id' => 'profile#index', as: :profile
 
 
   get '/about' => 'pages#about'
