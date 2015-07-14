@@ -7,7 +7,7 @@
 <% @events.each do |event| %>
   <article id="<%= event.id %>">
     <% if event.creator != @user %>
-      <%= event.creator.full_name %>
+      <%= link_to event.creator.full_name, profile_path(event.creator) %>
     <%end%>
     <br>
     <%= image_tag(event.image.small)%><br>

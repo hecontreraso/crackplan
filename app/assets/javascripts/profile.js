@@ -7,30 +7,28 @@ ready = function() {
 
 		var join_button = $(event.target);
 		var id = join_button.closest("article").attr("id");
-    
+	   
     $.post("/events/" + id + "/join", function(data, status){
 
-			if (data.state_changed == "changed"){
-				$("#" + id).remove();
+			if($("#is_current_user_profile").text() == "true"){
+							console.log("same profile");
+				if (data.state_changed == "changed"){
+					$("#" + id).remove();
+				}
+    	}
+    	else if (data.state_changed == "changed"){
+    					console.log("other profile");
+				if( join_button.text() == "Going" ){
+					join_button.text("Join");
+				}
+				else{
+					join_button.text("Going");	
+				}
 			}
-    
+
     }, "json");
+
 	});
-
-
-
-
-	// if($("#is_current_user_profile").text == true){
-	// 	$("a[data-remote]").on("ajax:success", function(event, data, status, xhr){
-	// 		var id = $(event.target).closest("article").attr("id");
-	// 		console.log("Removing event: " + id + " from interface");
-			
-	// 	});
-
-	// 	$("a[data-remote]").on("ajax:error", function(event, data, status, xhr){
-	// 		alert("error");
-	// 	});	
-	// }
 
 };
 
