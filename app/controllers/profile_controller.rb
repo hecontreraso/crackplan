@@ -4,18 +4,6 @@ class ProfileController < ApplicationController
 
 	layout "internal"
 
-  # POST /profile/events/:id/join
-  def join
-		@event = Event.find(params[:id])
-
-    respond_to do |format|
-      if join_event(@event)
-        format.js {}
-      end
-    end
-  end
-
-
 	# GET /events
 	# GET /events.json
 	def index

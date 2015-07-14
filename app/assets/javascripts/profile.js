@@ -11,13 +11,11 @@ ready = function() {
     $.post("/events/" + id + "/join", function(data, status){
 
 			if($("#is_current_user_profile").text() == "true"){
-							console.log("same profile");
 				if (data.state_changed == "changed"){
 					$("#" + id).remove();
 				}
     	}
     	else if (data.state_changed == "changed"){
-    					console.log("other profile");
 				if( join_button.text() == "Going" ){
 					join_button.text("Join");
 				}
