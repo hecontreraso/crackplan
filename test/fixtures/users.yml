@@ -19,6 +19,7 @@
 #  last_name              :string
 #  birthdate              :date
 #  gender                 :string
+#  image                  :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
