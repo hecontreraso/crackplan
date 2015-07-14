@@ -22,7 +22,7 @@ class EventDecorator < Draper::Decorator
 
   #Returns how long ago the event was created
   def time_created
-    dif = (Time.now.hour - created_at.hour).abs
+    dif = ((Time.now - created_at) / 1.hour).round
     if dif < 24
       return "#{dif}h"
     elsif dif < 168

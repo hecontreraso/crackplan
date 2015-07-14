@@ -1,0 +1,17 @@
+<article id="<%= event.id %>" >
+  <%= event.creator.full_name %>
+  <%= event.time_created %>
+  <br>
+  <%= image_tag(event.image.small)%><br>
+  <%= event.details %>
+  <br>
+  <%= event.users.collect { |user| user.full_name } %>
+  <br>
+  <%= event.where %> | <%= event.friendly_date %> at <%= event.friendly_hour %>
+  <br>
+  <% if user_signed_in?%>
+    <%= link_to event.going_or_join, join_event_from_events_path(event), remote: true, method: :post %>
+  <% end %>
+</article>
+<br>
+<br>

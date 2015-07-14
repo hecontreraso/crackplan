@@ -32,9 +32,9 @@ class User < ActiveRecord::Base
 
 	has_many :created_events, :class_name => "Event", :foreign_key => "creator_id"
 
-	validates :first_name, presence: true, length: { maximum: 35 }
-	validates :last_name, presence: true, length: { maximum: 35 }
-	validates :birthdate, presence: true, timeliness: { type: :date, before: Date.today, before_message: "The birthdate is incorrect" }
-	validates :gender, presence: true, inclusion: [ "Male", "Female" ]
+	# validates :first_name, presence: true, length: { maximum: 35 }
+	# validates :last_name, presence: true, length: { maximum: 35 }
+	# validates :birthdate, presence: true, timeliness: { type: :date, before: Date.today, before_message: "The birthdate is incorrect" }
+	# validates :gender, presence: true, inclusion: [ "Male", "Female" ]
 
 end

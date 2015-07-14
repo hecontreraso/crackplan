@@ -5,19 +5,21 @@
 <br>
 
 <% @events.each do |event| %>
-  <% if event.creator != @user %>
-    <%= event.creator.full_name %>
-  <%end%>
-  <br>
-  <%= image_tag(event.image.small)%><br>
-  <%= event.details %>
-  <br>
-  <%= event.users.collect { |user| user.full_name } %>
-  <br>
-  <%= event.where %> | <%= event.friendly_date %> at <%= event.friendly_hour %>
-  <% if user_signed_in?%>
-    <%= button_to event.going_or_join, join_event_path(event), method: :post %>
-  <% end %>
+  <article id="<%= event.id %>">
+    <% if event.creator != @user %>
+      <%= event.creator.full_name %>
+    <%end%>
+    <br>
+    <%= image_tag(event.image.small)%><br>
+    <%= event.details %>
+    <br>
+    <%= event.users.collect { |user| user.full_name } %>
+    <br>
+    <%= event.where %> | <%= event.friendly_date %> at <%= event.friendly_hour %>
+    <% if user_signed_in?%>
+      <%= link_to event.going_or_join, join_event_from_profile_path(event), remote: true, method: :post %>
+    <% end %>
+  </article>
   <br>
   <br>
 <% end %>
