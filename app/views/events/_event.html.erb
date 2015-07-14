@@ -1,4 +1,4 @@
-<article>
+<article id="<%= event.id %>" >
   <%= event.creator.full_name %>
   <%= event.time_created %>
   <br>
@@ -10,7 +10,7 @@
   <%= event.where %> | <%= event.friendly_date %> at <%= event.friendly_hour %>
   <br>
   <% if user_signed_in?%>
-    <%= link_to event.going_or_join, join_event_path(event), remote: true %>
+    <%= link_to event.going_or_join, join_event_from_events_path(event), remote: true, method: :post %>
   <% end %>
 </article>
 <br>

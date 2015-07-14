@@ -2,14 +2,15 @@
 <html>
 <head>
   <title>Crankplan</title>
-
+  <%= stylesheet_link_tag 'application', params[:controller], :media => "all",'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "application", params[:controller], 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-
+  
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta charset="utf-8">
 </head>
-<body>
+<body class="<%= controller_name %> <%= action_name %>">
 
   <% if notice %>
     <p class="alert alert-notice"><%= notice %></p>

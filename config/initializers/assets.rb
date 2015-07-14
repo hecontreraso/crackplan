@@ -6,6 +6,11 @@ Rails.application.config.assets.precompile += [/.*\.js/,/.*\.css/]
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
+Rails.application.config.assets.precompile += ["events.js", "events.scss"]
+Rails.application.config.assets.precompile += ["landing.js", "landing.scss"]
+Rails.application.config.assets.precompile += ["pages.js", "pages.scss"]
+Rails.application.config.assets.precompile += ["profile.js", "profile.scss"]
+
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.

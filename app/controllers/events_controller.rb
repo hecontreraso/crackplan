@@ -6,21 +6,28 @@ class EventsController < ApplicationController
 
   # POST /events/:id/join
   def join
-    @event = set_event
-
-    assistant = Assistant.find_by(event_id: @event.id, user_id: current_user.id)
-  
-    if assistant
-      if @event.creator != current_user
-        assistant.destroy
+    respond_to do |format|
+      if join_event(set_event)
+        format.js {}
       end
-    else
-      Assistant.create(event_id: @event.id, user_id: current_user.id)
     end
 
-    # Returns to referer page
-    # session[:return_to] ||= request.referer
-    # redirect_to session.delete(:return_to)
+
+    # @event = set_event
+
+    # assistant = Assistant.find_by(event_id: @event.id, user_id: current_user.id)
+
+    # respond_to do |format|
+    #   if assistant
+    #     if @event.creator != current_user
+    #       assistant.destroy
+    #       format.js {}
+    #     end
+    #   else
+    #     Assistant.create(event_id: @event.id, user_id: current_user.id)
+    #     format.js {}
+    #   end
+    # end
   end 
 
   # GET /events
