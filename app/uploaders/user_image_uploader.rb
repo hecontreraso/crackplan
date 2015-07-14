@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class EventImageUploader < CarrierWave::Uploader::Base
+class UserImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -22,7 +22,7 @@ class EventImageUploader < CarrierWave::Uploader::Base
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-    'event_missing.jpg' #rails will look at 'app/assets/images/default_avatar.png'
+    'profile_missing.png' #rails will look at 'app/assets/images/default_avatar.png'
   end
 
   # Process files as they are uploaded:
@@ -33,13 +33,17 @@ class EventImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
+  version :large do
+    # returns a 500x500 image
+    process :resize_to_fill => [500, 500]
+  end
   version :medium do
-    # returns a 50x50 image
-    process :resize_to_fill => [960, 640]
+    # returns a 350x350 image
+    process :resize_to_fill => [350, 350]
   end
   version :small do
-    # returns a 35x35 image
-    process :resize_to_fill => [480, 320]
+    # returns a 200x200 image
+    process :resize_to_fill => [200, 200]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

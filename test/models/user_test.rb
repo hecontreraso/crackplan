@@ -19,6 +19,7 @@
 #  last_name              :string
 #  birthdate              :date
 #  gender                 :string
+#  image                  :string
 #
 
 require 'test_helper'
