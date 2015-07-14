@@ -6,28 +6,7 @@ class EventsController < ApplicationController
 
   # POST /events/:id/join
   def join
-    respond_to do |format|
-      if join_event(set_event)
-        format.js {}
-      end
-    end
-
-
-    # @event = set_event
-
-    # assistant = Assistant.find_by(event_id: @event.id, user_id: current_user.id)
-
-    # respond_to do |format|
-    #   if assistant
-    #     if @event.creator != current_user
-    #       assistant.destroy
-    #       format.js {}
-    #     end
-    #   else
-    #     Assistant.create(event_id: @event.id, user_id: current_user.id)
-    #     format.js {}
-    #   end
-    # end
+    render json: { state_changed: "changed" } if join_event(set_event)
   end 
 
   # GET /events

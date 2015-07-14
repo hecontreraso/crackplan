@@ -1,6 +1,6 @@
 <%= @user.full_name %>
 <%= link_to 'Edit profile', edit_user_registration_path %>
-
+<div hidden id="is_current_user_profile"><%= @is_current_user_profile %></div>
 <br>
 <br>
 
@@ -16,10 +16,12 @@
     <%= event.users.collect { |user| user.full_name } %>
     <br>
     <%= event.where %> | <%= event.friendly_date %> at <%= event.friendly_hour %>
-    <% if user_signed_in?%>
-      <%= link_to event.going_or_join, join_event_from_profile_path(event), remote: true, method: :post %>
+    <br>
+    <% if user_signed_in? && event.creator != current_user %>
+      <span class="join_event"><%= event.going_or_join %></span>
     <% end %>
+    <br>
+    <br>
   </article>
-  <br>
-  <br>
+
 <% end %>
