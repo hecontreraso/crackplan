@@ -4,7 +4,6 @@
 <h5>Welcome the new private social network to share events <br />
     with you closest friends!
 </h5>
-<%= link_to "Sign up", new_user_registration_path %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
  <%= f.email_field :email, autofocus: true %>
