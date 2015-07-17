@@ -7,17 +7,17 @@ class EventsController < ApplicationController
   # POST /events/:id/join
   def join
     event = set_event
-    assistant = Assistant.find_by(event_id: event.id, user_id: current_user.id)
+
     changed = false
-    if assistant
+    if current_user.is_going_to?(event)
       if event.creator != current_user
-        assistant.destroy
+        current_user.quit_event(event)
         changed = true
       else
         changed = false
       end
     else
-      Assistant.create(event_id: event.id, user_id: current_user.id)
+      current_user.join_event(event)
       changed = true
     end
 
@@ -58,8 +58,9 @@ class EventsController < ApplicationController
       if @event.save
 
         @event.creator = UserDecorator.new(@event.creator)
+
+        current_user.join_event(@event)
         
-        Assistant.create(user_id: current_user.id, event_id: @event.id)
         format.html { redirect_to events_path }
         format.js {}
         format.json { render :show, status: :created, location: @event }
