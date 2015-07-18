@@ -19,17 +19,10 @@ Event.create(creator_id: 2, date: Date.new(2015, 10, 26), time: Time.new(2015, 7
 Event.create(creator_id: 3, date: Date.new(2015, 11, 17), time: Time.new(2015, 7, 5, 12, 30, 0), created_at: (DateTime.now - 200.hour), image: "6.jpg", details: "HEY~My friend! June 10 is my birthday,I want to invite u guys to my BD party this Saturday. Come to celebrate with me,I'm really happy to see u on my BD party!", where: "Empire State Building 75th floor")
 Event.create(creator_id: 4, date: Date.new(2015, 8, 25), time: Time.new(2015, 7, 5, 10, 0, 0), created_at: (DateTime.now - 228.hour), image: "7.jpg", details: "Sakura Matsuri, is a 2 day event, the annual cherry blossom festival at BBG, offers over 60 events and performances that celebrate traditional and contemporary Japanese culture. The festival marks the end of Hanami, the Japanese cultural tradition of enjoying each moment of the cherry blossom season.", where: "Brooklyn Botanic Garden 990 Washington Ave, Brooklyn, New York 11225")
 
-Assistant.create(user_id: 1, event_id: 1)
-Assistant.create(user_id: 1, event_id: 2)
-Assistant.create(user_id: 1, event_id: 3)
-Assistant.create(user_id: 1, event_id: 4)
-Assistant.create(user_id: 2, event_id: 5)
 Assistant.create(user_id: 2, event_id: 6)
 Assistant.create(user_id: 3, event_id: 2)
-Assistant.create(user_id: 3, event_id: 6)
 Assistant.create(user_id: 3, event_id: 4)
 Assistant.create(user_id: 3, event_id: 5)
 Assistant.create(user_id: 3, event_id: 7)
-Assistant.create(user_id: 4, event_id: 7)
 
 # Follow.create(follower_id: 1, followed_id: 3, status: "following")
