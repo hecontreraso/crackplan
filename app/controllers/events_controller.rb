@@ -4,8 +4,8 @@ class EventsController < ApplicationController
   
   layout "internal"
 
-  # POST /events/:id/join
-  def join
+  # POST /events/:id/toggle_assistance
+  def toggle_assistance
     event = set_event
 
     changed = false
@@ -32,8 +32,9 @@ class EventsController < ApplicationController
 
     @events.collect do |event|
       event.creator = UserDecorator.new(event.creator)
-      user_id = current_user.id if current_user
-      event.going_or_join = event.is_current_user_going?(user_id) ? "Going" : "Join"
+      if current_user
+        event.going_or_join = current_user.is_going_to?(@event) ? "Going" : "Join"
+      end
     end
   end
 

@@ -15,15 +15,25 @@ class ProfileController < ApplicationController
 		@events.collect do |event|
 
 			event.creator = UserDecorator.new(event.creator)
-	    user_id = current_user.id if current_user
 
-  	  if event.is_current_user_going?(user_id)
-	    	event.going_or_join = "Going"
-	  	else
-	    	event.going_or_join = "Join"
-	  	end
-	  	
+    	if current_user
+    		event.going_or_join = current_user.is_going_to?(event) ? "Going" : "Join";
+    		@user.follow_or_unfollow = current_user.following?(@user) ? "Unfollow" : "Follow";
+ 	  	end
 		end
+	end
+
+	def toggle_follow
+		@user = set_user
+
+		if current_user.following?(@user)
+			current_user.unfollow(@user)
+		else
+    	#TODO si el perfil es publico, guardar. Si no, guardar solicitud
+			current_user.follow(@user)
+			# current_user.request_follow(@user)
+		end
+    # render json: { state_changed: "changed" } if changed
 	end
 
 	private

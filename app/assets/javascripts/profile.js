@@ -8,7 +8,7 @@ ready = function() {
 		var join_button = $(event.target);
 		var id = join_button.closest("article").attr("id");
 	   
-    $.post("/events/" + id + "/join", function(data, status){
+    $.post("/events/" + id + "/toggle_assistance", function(data, status){
 
 			if($("#is_current_user_profile").text() == "true"){
 				if (data.state_changed == "changed"){
@@ -20,13 +20,40 @@ ready = function() {
 					join_button.text("Join");
 				}
 				else{
-					join_button.text("Going");	
+					joi_nbutton.text("Going");	
+				}
+			}
+
+    }, "json");
+	});
+
+	$("#follow").click(function(){
+
+		var follow_button = $(event.target);
+		var id = $("#user_id").text)(;
+	   
+    $.post("/events/" + id + "/join", function(data, status){
+
+			if($("#is_current_user_profile").text() == "true"){
+				if (data.state_changed == "changed"){
+					$("#" + id).remove();
+				}
+    	}
+    	else if (data.state_changed == "changed"){
+				if( follow_button.text() == "Going" ){
+					follow_button.text("Join");
+				}
+				else{
+					follow_button.text("Going");	
 				}
 			}
 
     }, "json");
 
+    //ejecutar petición ajax para seguir a la persona. Si la respuesta es true, cambiar el texto de follow a unfollow
+
 	});
+
 
 };
 

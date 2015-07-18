@@ -28,12 +28,4 @@ class Event < ActiveRecord::Base
 	# Avatar uploader using carrierwave
   mount_uploader :image, EventImageUploader
 
-	def is_current_user_going?(user_id)
-		if Assistant.find_by(event_id: id, user_id: user_id)
-			return true
-		else
-			return false
-		end
-	end
-
 end

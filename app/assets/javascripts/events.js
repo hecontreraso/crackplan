@@ -8,7 +8,7 @@ ready = function() {
 		var join_button = $(event.target);
 		var id = join_button.closest("article").attr("id");
     
-    $.post("/events/" + id + "/join", function(data, status){
+    $.post("/events/" + id + "/toggle_assistance", function(data, status){
 
 			if (data.state_changed == "changed"){
 				if( join_button.text() == "Going" ){

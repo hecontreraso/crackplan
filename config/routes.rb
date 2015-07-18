@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
   end
 
-  post '/events/:id/join' => 'events#join', as: :join_event_from_events
+  post '/events/:id/join' => 'events#toggle_assistance', as: :join_event_from_events
   post '/profile/events/:id/join' => 'profile#join', as: :join_event_from_profile
   get '/profile/:id' => 'profile#index', as: :profile
 
