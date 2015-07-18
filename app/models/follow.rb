@@ -5,8 +5,8 @@
 #  id          :integer          not null, primary key
 #  follower_id :integer
 #  followed_id :integer
+#  status      :string
 #
-
 
 class Follow < ActiveRecord::Base
 

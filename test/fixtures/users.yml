@@ -19,6 +19,7 @@
 #  last_name              :string
 #  birthdate              :date
 #  gender                 :string
+#  privacy                :string           default("public")
 #  image                  :string
 #
 
