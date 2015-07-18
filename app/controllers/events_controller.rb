@@ -6,22 +6,8 @@ class EventsController < ApplicationController
 
   # POST /events/:id/toggle_assistance
   def toggle_assistance
-    event = set_event
-
-    changed = false
-    if current_user.is_going_to?(event)
-      if event.creator != current_user
-        current_user.quit_event(event)
-        changed = true
-      else
-        changed = false
-      end
-    else
-      current_user.join_event(event)
-      changed = true
-    end
-
-    render json: { state_changed: "changed" } if changed
+    returned_state = current_user.toggle_assistance(set_event, current_user)
+    render json: { returned_state: returned_state }    
   end 
 
   # GET /events
@@ -33,7 +19,7 @@ class EventsController < ApplicationController
     @events.collect do |event|
       event.creator = UserDecorator.new(event.creator)
       if current_user
-        event.going_or_join = current_user.is_going_to?(@event) ? "Going" : "Join"
+        event.going_or_join = current_user.is_going_to?(event) ? "Going" : "Join"
       end
     end
   end

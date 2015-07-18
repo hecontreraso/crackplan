@@ -9,16 +9,7 @@ ready = function() {
 		var id = join_button.closest("article").attr("id");
     
     $.post("/events/" + id + "/toggle_assistance", function(data, status){
-
-			if (data.state_changed == "changed"){
-				if( join_button.text() == "Going" ){
-					join_button.text("Join");
-				}
-				else{
-					join_button.text("Going");	
-				}
-			}
-    
+    	join_button.text(data.returned_state);    
     }, "json");
 	});
 

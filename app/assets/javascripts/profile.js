@@ -11,49 +11,25 @@ ready = function() {
     $.post("/events/" + id + "/toggle_assistance", function(data, status){
 
 			if($("#is_current_user_profile").text() == "true"){
-				if (data.state_changed == "changed"){
+				if (data.returned_state == "Join"){
 					$("#" + id).remove();
 				}
     	}
-    	else if (data.state_changed == "changed"){
-				if( join_button.text() == "Going" ){
-					join_button.text("Join");
-				}
-				else{
-					joi_nbutton.text("Going");	
-				}
-			}
+    	else{
+    		join_button.text(data.returned_state);
+    	} 
 
     }, "json");
 	});
 
 	$("#follow").click(function(){
 
-		var follow_button = $(event.target);
-		var id = $("#user_id").text)(;
-	   
-    $.post("/events/" + id + "/join", function(data, status){
-
-			if($("#is_current_user_profile").text() == "true"){
-				if (data.state_changed == "changed"){
-					$("#" + id).remove();
-				}
-    	}
-    	else if (data.state_changed == "changed"){
-				if( follow_button.text() == "Going" ){
-					follow_button.text("Join");
-				}
-				else{
-					follow_button.text("Going");	
-				}
-			}
-
+		var id = $("#user_id").text();
+    $.post("/profile/" + id + "/toggle_follow", function(data, status){
+    	$("#follow").text(data.returned_state);
     }, "json");
 
-    //ejecutar petición ajax para seguir a la persona. Si la respuesta es true, cambiar el texto de follow a unfollow
-
 	});
-
 
 };
 

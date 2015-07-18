@@ -28,4 +28,11 @@ class Event < ActiveRecord::Base
 	# Avatar uploader using carrierwave
   mount_uploader :image, EventImageUploader
 
+  after_save :assist_to_event
+
+  private
+    def assist_to_event
+      Assistant.create(user_id: creator.id, event_id: id)
+    end
+
 end

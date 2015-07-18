@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20150716230440) do
   end
 
   add_index "assistants", ["event_id"], name: "index_assistants_on_event_id", using: :btree
+  add_index "assistants", ["user_id", "event_id"], name: "index_assistants_on_user_id_and_event_id", unique: true, using: :btree
   add_index "assistants", ["user_id"], name: "index_assistants_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150716230440) do
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
+    t.string  "status"
   end
 
   add_index "follows", ["followed_id"], name: "index_follows_on_followed_id", using: :btree
@@ -64,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150716230440) do
     t.string   "last_name"
     t.date     "birthdate"
     t.string   "gender"
+    t.string   "privacy"
     t.string   "image"
   end
 
