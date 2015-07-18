@@ -4,24 +4,10 @@ class EventsController < ApplicationController
   
   layout "internal"
 
-  # POST /events/:id/join
-  def join
-    event = set_event
-    assistant = Assistant.find_by(event_id: event.id, user_id: current_user.id)
-    changed = false
-    if assistant
-      if event.creator != current_user
-        assistant.destroy
-        changed = true
-      else
-        changed = false
-      end
-    else
-      Assistant.create(event_id: event.id, user_id: current_user.id)
-      changed = true
-    end
-
-    render json: { state_changed: "changed" } if changed
+  # POST /events/:id/toggle_assistance
+  def toggle_assistance
+    returned_state = current_user.toggle_assistance(set_event, current_user)
+    render json: { returned_state: returned_state }    
   end 
 
   # GET /events
@@ -32,8 +18,9 @@ class EventsController < ApplicationController
 
     @events.collect do |event|
       event.creator = UserDecorator.new(event.creator)
-      user_id = current_user.id if current_user
-      event.going_or_join = event.is_current_user_going?(user_id) ? "Going" : "Join"
+      if current_user
+        event.going_or_join = current_user.is_going_to?(event) ? "Going" : "Join"
+      end
     end
   end
 
@@ -58,8 +45,9 @@ class EventsController < ApplicationController
       if @event.save
 
         @event.creator = UserDecorator.new(@event.creator)
+
+        current_user.join_event(@event)
         
-        Assistant.create(user_id: current_user.id, event_id: @event.id)
         format.html { redirect_to events_path }
         format.js {}
         format.json { render :show, status: :created, location: @event }

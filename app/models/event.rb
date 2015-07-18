@@ -19,7 +19,6 @@ class Event < ActiveRecord::Base
 	has_many :assistants
 	has_many :users, through: :assistants
 	belongs_to :creator, class_name: "User"
-	# belongs_to :creator, :class_name => "User"
 
 	validates :creator_id, presence: true
 	validates :date, presence: true, timeliness: { type: :date, after: Date.today, after_message: "Events can only be created from tomorrow" }
@@ -29,12 +28,11 @@ class Event < ActiveRecord::Base
 	# Avatar uploader using carrierwave
   mount_uploader :image, EventImageUploader
 
-	def is_current_user_going?(user_id)
-		if Assistant.find_by(event_id: id, user_id: user_id)
-			return true
-		else
-			return false
-		end
-	end
+  after_save :assist_to_event
+
+  private
+    def assist_to_event
+      Assistant.create(user_id: creator.id, event_id: id)
+    end
 
 end

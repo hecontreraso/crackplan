@@ -8,22 +8,25 @@ ready = function() {
 		var join_button = $(event.target);
 		var id = join_button.closest("article").attr("id");
 	   
-    $.post("/events/" + id + "/join", function(data, status){
+    $.post("/events/" + id + "/toggle_assistance", function(data, status){
 
 			if($("#is_current_user_profile").text() == "true"){
-				if (data.state_changed == "changed"){
+				if (data.returned_state == "Join"){
 					$("#" + id).remove();
 				}
     	}
-    	else if (data.state_changed == "changed"){
-				if( join_button.text() == "Going" ){
-					join_button.text("Join");
-				}
-				else{
-					join_button.text("Going");	
-				}
-			}
+    	else{
+    		join_button.text(data.returned_state);
+    	} 
 
+    }, "json");
+	});
+
+	$("#follow").click(function(){
+
+		var id = $("#user_id").text();
+    $.post("/profile/" + id + "/toggle_follow", function(data, status){
+    	$("#follow").text(data.returned_state);
     }, "json");
 
 	});

@@ -35,7 +35,7 @@ gem 'draper'
 # for aws cloud storage
 gem 'fog'
 # photo resizing
-gem "mini_magick"
+gem 'mini_magick'
 # file upload solution
 gem 'carrierwave'
 

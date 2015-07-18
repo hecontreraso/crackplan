@@ -1,12 +1,24 @@
-<%= image_tag(@user.image.small)%><br>
-<%= @user.full_name %>
-<%= link_to 'Edit profile', edit_user_registration_path %>
-<div hidden id="is_current_user_profile"><%= @is_current_user_profile %></div>
-<br>
-<br>
+<section>
+  <div hidden id="is_current_user_profile"><%= @is_current_user_profile %></div>
+  <div hidden id="user_id"><%= @user.id %></div>
+
+  <%= image_tag(@user.image.small)%><br>
+  <%= @user.full_name %>
+  <br>
+  <br>
+  <% unless @is_current_user_profile %>
+    <span id="follow"><%= @user.follow_or_unfollow %></span>
+  <% end %>
+  <br>
+  <br>
+  <%= link_to 'Edit profile', edit_user_registration_path %>
+  <br>
+  <br>
+
+</section>
 
 <% @events.each do |event| %>
-  <article id="<%= event.id %>">
+  <article id="<%= event.id %>" class="event">
     <% if event.creator != @user %>
       <%= link_to event.creator.full_name, profile_path(event.creator) %>
     <%end%>
@@ -24,5 +36,6 @@
     <br>
     <br>
   </article>
-
 <% end %>
+
+

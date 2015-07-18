@@ -4,5 +4,6 @@ class AddDetailsToUsers < ActiveRecord::Migration
     add_column :users, :last_name, :string
     add_column :users, :birthdate, :date
     add_column :users, :gender, :string
+    add_column :users, :privacy, :string
   end
 end
