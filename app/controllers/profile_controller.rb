@@ -9,7 +9,7 @@ class ProfileController < ApplicationController
 	def index
 		@user = set_user.decorate
 
-		if current_user
+		if user_signed_in?
 			@is_current_user_profile = (@user.id == current_user.id) ? true : false
 			@user.follow_or_unfollow = current_user.get_relationship_label(@user)
 		end

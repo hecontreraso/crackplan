@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:join, :edit, :create, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :join, :edit, :create, :update, :destroy]
   
   layout "internal"
 
@@ -9,18 +9,18 @@ class EventsController < ApplicationController
     returned_state = current_user.toggle_assistance(set_event, current_user)
     render json: { returned_state: returned_state }    
   end 
+  
 
   # GET /events
   # GET /events.json
   def index
     @event = Event.new
     @events = Event.all.order(created_at: :desc).decorate
-
+    
     @events.collect do |event|
-      event.creator = UserDecorator.new(event.creator)
-      if current_user
-        event.going_or_join = current_user.is_going_to?(event) ? "Going" : "Join"
-      end
+      event.creator = UserDecorator.new(event.creator) 
+      event.creator = UserDecorator.new(event.creator) 
+      event.going_or_join = current_user.get_going_label(event)
     end
   end
 
@@ -38,6 +38,8 @@ class EventsController < ApplicationController
   def create
     event_params[:time] = event_params[:time].to_time
 
+    user_signed_in?
+
     @event = Event.new(event_params)
     @event.creator = current_user
 
@@ -45,8 +47,6 @@ class EventsController < ApplicationController
       if @event.save
 
         @event.creator = UserDecorator.new(@event.creator)
-
-        current_user.join_event(@event)
         
         format.html { redirect_to events_path }
         format.js {}

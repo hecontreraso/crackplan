@@ -1,7 +1,6 @@
 <article id="<%= event.id %>" >
   <%= link_to event.creator.full_name, profile_path(event.creator) %>
 
-  <%= event.time_created %>
   <br>
   <%= image_tag(event.image.small)%><br>
   <%= event.details %>

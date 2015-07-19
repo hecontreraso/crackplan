@@ -18,12 +18,15 @@ class Event < ActiveRecord::Base
 
 	has_many :assistants
 	has_many :users, through: :assistants
-	belongs_to :creator, class_name: "User"
+
+	belongs_to :creator, class_name: "User", inverse_of: :created_events
 
 	validates :creator_id, presence: true
 	validates :date, presence: true, timeliness: { type: :date, after: Date.today, after_message: "Events can only be created from tomorrow" }
 
 	attr_accessor :going_or_join
+	attr_accessor :sort_time
+	attr_accessor :event_by
 	
 	# Avatar uploader using carrierwave
   mount_uploader :image, EventImageUploader
@@ -31,6 +34,7 @@ class Event < ActiveRecord::Base
   after_save :assist_to_event
 
   private
+  	#Add event creator to assistance list after the creation
     def assist_to_event
       Assistant.create(user_id: creator.id, event_id: id)
     end

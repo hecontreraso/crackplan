@@ -10,6 +10,7 @@ User.create(privacy: "public", first_name: "Esteban", last_name: "Contreras", ge
 User.create(privacy: "public", first_name: "Morcio", last_name: "D'Achiardi", gender: "Male", birthdate: Date.new(1992, 6, 26), email: "morcio@morcio.com", password: "12345678")
 User.create(privacy: "private", first_name: "Isabel", last_name: "Ruiz", gender: "Female", birthdate: Date.new(1993, 12, 2), email: "iris9112@gmail.com", password: "12345678")
 User.create(privacy: "private", first_name: "Andres", last_name: "Heredia", gender: "Male", birthdate: Date.new(1996, 11, 2), email: "andres.heredia@gmail.com", password: "12345678")
+User.create(privacy: "public", first_name: "Kung", last_name: "Fury", gender: "Male", birthdate: Date.new(1996, 11, 2), email: "kung.fury@gmail.com", password: "12345678")
 
 Event.create(creator_id: 1, date: Date.new(2015, 8, 5), time: Time.new(2015, 7, 5, 9, 0, 0), created_at: (DateTime.now), image: "1.jpg", details: "We're going to celebrate the end of angelhack 2015... We are gonna drink some beers!!!", where: "Bogota Beer Company")
 Event.create(creator_id: 1, date: Date.new(2015, 8, 07), time: Time.new(2015, 7, 5, 6, 4, 5), created_at: (DateTime.now - 1.hour), image: "2.jpg", details: "One Day Without Shoes! Don't wear shoes...DO IT!", where: "Madison, Tennessee")

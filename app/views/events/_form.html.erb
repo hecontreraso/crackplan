@@ -13,7 +13,7 @@
   <br>
   <%= f.date_field(:date, min: Date.today) %>
   <br>
-  <%= f.text_field :time %>
+  <%= f.text_field :time, id: "event_time" %>
   <br>
   <%= f.file_field :image %>
   <%= token_tag form_authenticity_token %>

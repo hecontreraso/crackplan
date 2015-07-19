@@ -26,23 +26,26 @@
 class User < ActiveRecord::Base
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
-	devise :database_authenticatable, :registerable,
-       :recoverable, :rememberable, :trackable, :validatable
+	devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   # A user can assist to many events
 	has_many :assistants 
 	has_many :events, through: :assistants
 
   # A user can create many events
-	has_many :created_events, class_name: "Event", foreign_key: "creator_id"
+	has_many :created_events, class_name: "Event", foreign_key: "creator_id", inverse_of: :creator
+
+  # A user has feeds of his events
+  has_many :feeds, inverse_of: :user
 
   # A user can follow another users
-	has_many :follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  has_many :follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :following, through: :follows, source: :followed
 
   # A user have followers
-	has_many :follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
-  has_many :followers, through: :follows, source: :follower
+  # has_many :follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
+  # has_many :followers, through: :follows, source: :follower
+
 
 	# Avatar uploader using carrierwave
   mount_uploader :image, UserImageUploader
@@ -54,6 +57,34 @@ class User < ActiveRecord::Base
 	validates :privacy, presence: true, inclusion: [ "private", "public" ]
 
   attr_accessor :follow_or_unfollow
+
+  #TODO FIX THIS ACCESOR AND MAKE ACTIVERECORD WORK
+  def followers
+    follower_ids = []
+    Follow.where(followed_id: id, status: :following).each do |follow|
+      follower_ids << follow.follower_id
+    end
+    User.where(id: follower_ids)
+  end
+
+  def get_going_label(event)
+    relationship = Assistant.find_by(event_id: event.id, user_id: id)
+    relationship.nil? ? "Join" : "Going"
+  end
+
+  # Returns true if the current user is following the other user.
+  def is_going_to?(event)
+  	events.include?(event)
+  end
+
+  def get_relationship_label(other_user)
+    relationship = Follow.find_by(follower_id: id, followed_id: other_user.id)
+    if relationship.nil?
+      return "follow"
+    else
+      return relationship.status
+    end
+  end
 
   # Request to join or quit from an event
   def toggle_assistance(event, current_user)
@@ -80,16 +111,6 @@ class User < ActiveRecord::Base
     end
   end 
 
-  def get_going_label(event)
-    relationship = Assistant.find_by(event_id: event.id, user_id: id)
-    relationship.nil? ? "Join" : "Going"
-  end
-
-  # Returns true if the current user is following the other user.
-  def is_going_to?(event)
-  	events.include?(event)
-  end
-
   # Attempts to follow or unfollow
   def toggle_follow(other_user)
     relationship = Follow.find_by(follower_id: id, followed_id: other_user.id)
@@ -111,15 +132,6 @@ class User < ActiveRecord::Base
         return "follow"
       end
       return "user_is_blocked"
-    end
-  end
-
-  def get_relationship_label(other_user)
-    relationship = Follow.find_by(follower_id: id, followed_id: other_user.id)
-    if relationship.nil?
-      return "follow"
-    else
-      return relationship.status
     end
   end
 
@@ -152,62 +164,5 @@ class User < ActiveRecord::Base
   def blocked?(other_user)
     Follow.find_by(follower_id: id, followed_id: other_user.id, status: :blocked)
   end
-
-  # Request to follow an user
-  # def follow(other_user)
-  #   relationship = Follow.find_by(follower_id: id, followed_id: other_user.id)
-  #   if relationship.nil?
-  #     if other_user.privacy == "public"
-  #       Follow.create(follower_id: id, followed_id: other_user.id, status: :following)
-  #     else
-  #       Follow.create(follower_id: id, followed_id: other_user.id, status: :requested)
-  #     end
-  #   end
-  # end
-
-  # Unfollows an user.
-  # def unfollow(other_user)
-  #   relationship = Follow.find_by(follower_id: id, followed_id: other_user.id)
-  #   unless relationship.nil?
-  #     case relationship.status
-  #     when "requested"
-  #       relationship.destroy
-  #     when "following"
-  #       relationship.destroy
-  #     end
-  #   end
-  # end
-
-  # def join_event(event)
-  #   event_creator = event.creator
-  #   if event_creator.privacy.public?
-  #     Assistant.create(event_id: event.id, user_id: id)
-  #   else
-  #     if following?(event_creator)
-  #       Assistant.create(event_id: event.id, user_id: id)
-  #     end
-  #   end
-  # end
-
-  # def quit_event(event)
-  #   Assistant.destroy(event_id: event.id, user_id: id)
-  # end
-
-  # # Blocks an user.
-  # def block(other_user)
-  #   relationship = Follow.find_by(follower_id: id, followed_id: other_user.id)
-  #   relationship.destroy if relationship
-  #   Follow.create(follower_id: id, followed_id: other_user.id, status: :blocked)
-  # end
-
-  # # Unblocks an user.
-  # def unblock(other_user)
-  #   relationship = Follow.find_by(follower_id: id, followed_id: other_user.id)
-  #   unless relationship.nil?
-  #     if relationship.status == "blocked"
-  #       relationship.destroy      
-  #     end
-  #   end
-  # end
 
 end
