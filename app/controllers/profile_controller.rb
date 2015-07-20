@@ -7,16 +7,15 @@ class ProfileController < ApplicationController
 	# GET /events
 	# GET /events.json
 	def index
-		@user = set_user.decorate
+		@user = set_user
 
 		if user_signed_in?
 			@is_current_user_profile = (@user.id == current_user.id) ? true : false
 			@user.follow_or_unfollow = current_user.get_relationship_label(@user)
 		end
 
-		@events = @user.events.decorate
+		@events = @user.events
 		@events.collect do |event|
-			event.creator = UserDecorator.new(event.creator)
 			event.going_or_join = current_user.get_going_label(event)	if current_user
 		end
 	end

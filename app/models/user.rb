@@ -165,4 +165,11 @@ class User < ActiveRecord::Base
     Follow.find_by(follower_id: id, followed_id: other_user.id, status: :blocked)
   end
 
+  ########################### DECORATORS ###########################
+
+  #Returns the user full name
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
 end

@@ -33,6 +33,29 @@ class Event < ActiveRecord::Base
 
   after_save :assist_to_event
 
+  ########################### DECORATORS ###########################
+  
+  def friendly_date
+    date.strftime("%b %d")
+  end
+
+  def friendly_hour
+    time.strftime("%l:%M%P") unless time.nil?
+  end
+
+  #Returns how long ago the event was created
+  def time_created
+    dif = ((Time.now - created_at) / 1.hour).round
+    if dif < 24
+      return "#{dif}h"
+    elsif dif < 168
+      w = (dif/24).floor
+      return "#{w}d"
+    else 
+      return ">1w"
+    end
+  end
+
   private
   	#Add event creator to assistance list after the creation
     def assist_to_event

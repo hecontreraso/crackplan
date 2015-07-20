@@ -30,8 +30,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'annotate', '~> 2.6.6'
 # For auth system
 gem 'devise'
-# For decorators
-gem 'draper'
 # for aws cloud storage
 gem 'fog'
 # photo resizing

@@ -40,9 +40,11 @@ ActiveRecord::Schema.define(version: 20150719043746) do
   end
 
   create_table "feeds", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "event_id"
-    t.integer "feed_creator_id"
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.integer  "feed_creator_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "feeds", ["event_id"], name: "index_feeds_on_event_id", using: :btree

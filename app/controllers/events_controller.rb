@@ -15,11 +15,11 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @event = Event.new
-    @events = Event.all.order(created_at: :desc).decorate
     
+    feeds = current_user.feeds.sort
+    @events = [] + feeds.collect{ |feed| feed.event }
+ 
     @events.collect do |event|
-      event.creator = UserDecorator.new(event.creator) 
-      event.creator = UserDecorator.new(event.creator) 
       event.going_or_join = current_user.get_going_label(event)
     end
   end
@@ -45,8 +45,6 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-
-        @event.creator = UserDecorator.new(@event.creator)
         
         format.html { redirect_to events_path }
         format.js {}
