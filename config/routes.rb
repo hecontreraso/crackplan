@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
   resources :events, except: [:new]
 
-  devise_for :users
+  devise_for :users, controllers: { sessions: "users/sessions" }
   
   devise_scope :user do
     authenticated :user do
       root :to => 'events#index', as: :authenticated_root
+      get '/beta/sign_in' => 'events#index'
     end
     unauthenticated :user do
-      root :to => 'devise/sessions#new', as: :unauthenticated_root
+      root :to => 'users/sessions#new', as: :unauthenticated_root
+      get '/beta/sign_in' => 'users/sessions#internal_landing'
     end
   end
 
