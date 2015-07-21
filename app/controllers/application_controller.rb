@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 			:last_name, 
 			:birthdate, 
 			:gender, 
-			:email, 
+			:email,
 			:password, 
 			:password_confirmation) 
 		}

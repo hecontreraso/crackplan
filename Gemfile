@@ -40,6 +40,9 @@ gem 'carrierwave'
 # Secrets management
 gem "figaro", "~> 0.7.0"
 
+# Error detection in production
+gem 'airbrake'
+
 # For select hour component
 #gem 'simple_time_select'
 
