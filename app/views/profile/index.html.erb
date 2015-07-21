@@ -11,9 +11,9 @@
   <br>
   <%= @user.events.count %> Events
   <br>
-  <%= @user.followers.count %> Followers
+  <%= @user.followers.count-1 %> Followers
   <br>
-  <%= @user.following.count %> Following
+  <%= @user.following.count-1 %> Following
   <br>
 
   <% if current_user.nil? %>
