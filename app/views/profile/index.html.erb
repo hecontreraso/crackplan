@@ -33,7 +33,7 @@
 </section>
 
 
-<% if (@user.privacy == "public" || @current_user.following?(@user) )%>
+<% if (@user.privacy == "public" || (@current_user && @current_user.following?(@user)))%>
 
   <% @events.each do |event| %>
     <article id="<%= event.id %>" class="event">
