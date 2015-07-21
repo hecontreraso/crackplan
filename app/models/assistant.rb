@@ -13,7 +13,8 @@ class Assistant < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :event
 
-  after_save :notify_followers
+  after_create :notify_followers
+  after_destroy :destroy_notifications
 
   private
     def notify_followers
@@ -23,4 +24,10 @@ class Assistant < ActiveRecord::Base
     	end
     end
 
+    def destroy_notifications 
+      followers = User.find(user_id).followers
+      followers.each do |follower|
+        Feed.find_by(user_id: follower.id, event_id: event_id, feed_creator_id: user_id).destroy
+      end
+    end
 end
