@@ -7,13 +7,13 @@
     <% end %>
   <% end %>
 
-  <%= f.text_area :details, placeholder: 'Details' %>
+  <%= f.text_area :details, placeholder: 'Plan details...' %>
   <br>
-  <%= f.text_field :where, placeholder: 'Where' %>
+  <%= f.text_field :where, placeholder: 'Where? (Add a place)' %>
   <br>
   <%= f.date_field(:date, min: Date.today) %>
   <br>
-  <%= f.text_field :time %>
+  <%= f.text_field :time, id: "event_time", placeholder: 'Now add a time!' %>
   <br>
   <%= f.file_field :image %>
   <%= token_tag form_authenticity_token %>

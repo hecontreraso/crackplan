@@ -3,6 +3,8 @@
 var ready;
 ready = function() {
 
+	$('#event_time').timepicker({ 'minTime': '5:00am', 'maxTime': '11:00pm' });
+
 	$(".join_event").click(function(){
 
 		var join_button = $(event.target);

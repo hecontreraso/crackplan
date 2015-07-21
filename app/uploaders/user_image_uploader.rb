@@ -22,7 +22,8 @@ class UserImageUploader < CarrierWave::Uploader::Base
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-    'profile_missing.png' #rails will look at 'app/assets/images/default_avatar.png'
+    # 'profile_missing.png' #rails will look at 'app/assets/images/default_avatar.png'
+    'http://www.w3.org/Icons/caution.gif'
   end
 
   # Process files as they are uploaded:
@@ -39,11 +40,11 @@ class UserImageUploader < CarrierWave::Uploader::Base
   end
   version :medium do
     # returns a 350x350 image
-    process :resize_to_fill => [350, 350]
+    process :resize_to_fill => [300, 300]
   end
   version :small do
     # returns a 200x200 image
-    process :resize_to_fill => [200, 200]
+    process :resize_to_fill => [50, 50]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

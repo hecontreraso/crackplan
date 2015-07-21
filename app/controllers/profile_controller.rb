@@ -1,24 +1,20 @@
 class ProfileController < ApplicationController
 
-	# before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:toggle_follow]
 
 	layout "internal"
 
 	# GET /events
 	# GET /events.json
 	def index
-		@user = set_user.decorate
+		@user = set_user
 
-		if current_user
-			@is_current_user_profile = (@user.id == current_user.id) ? true : false
-			@user.follow_or_unfollow = current_user.get_relationship_label(@user)
+		if user_signed_in?
+			@current_user = current_user
+			@follow_or_unfollow = current_user.get_relationship_label(@user)
 		end
 
-		@events = @user.events.decorate
-		@events.collect do |event|
-			event.creator = UserDecorator.new(event.creator)
-			event.going_or_join = current_user.get_going_label(event)	if current_user
-		end
+		@events = @user.events
 	end
 
 	def toggle_follow

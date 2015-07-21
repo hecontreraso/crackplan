@@ -1,41 +1,87 @@
 <section>
-  <div hidden id="is_current_user_profile"><%= @is_current_user_profile %></div>
+  <div hidden id="is_current_user_profile"><%= @current_user == @user %></div>
   <div hidden id="user_id"><%= @user.id %></div>
+
+  <% if @current_user == @user %>
+    <%= link_to 'Edit profile', edit_user_registration_path %>
+  <% end %>
 
   <%= image_tag(@user.image.small)%><br>
   <%= @user.full_name %>
   <br>
+  <%= @user.events.count %> Events
   <br>
-  <% unless @is_current_user_profile %>
-    <span id="follow"><%= @user.follow_or_unfollow %></span>
+  <%= @user.followers.count %> Followers
+  <br>
+  <%= @user.following.count %> Following
+  <br>
+
+  <% if current_user.nil? %>
+    <p>You must be logged in to see <%= @user.full_name %>'s profile</p>
+  <% elsif current_user.following?(@user).nil? && @user.privacy == "private" %>
+    <p>This account is private</p>
+    <p>Request to follow <%= @user.full_name %> to see his events</p>
+  <% end%>
+
+  <% unless (@current_user.nil? || @current_user == @user)  %>
+    <span id="follow"><%= @follow_or_unfollow %></span>
   <% end %>
   <br>
   <br>
-  <%= link_to 'Edit profile', edit_user_registration_path %>
   <br>
   <br>
-
 </section>
 
-<% @events.each do |event| %>
-  <article id="<%= event.id %>" class="event">
-    <% if event.creator != @user %>
+
+<% if (@user.privacy == "public" || @current_user.following?(@user) )%>
+
+  <% @events.each do |event| %>
+    <article id="<%= event.id %>" class="event">
+      <%= image_tag(event.image.small)%>
+      <br>
+      <%= image_tag(event.creator.image.small)%>
+      <br>
+      Event by
       <%= link_to event.creator.full_name, profile_path(event.creator) %>
-    <%end%>
-    <br>
-    <%= image_tag(event.image.small)%><br>
-    <%= event.details %>
-    <br>
-    <%= event.users.collect { |user| user.full_name } %>
-    <br>
-    <%= event.where %> | <%= event.friendly_date %> at <%= event.friendly_hour %>
-    <br>
-    <% if user_signed_in? && event.creator != current_user %>
-      <span class="join_event"><%= event.going_or_join %></span>
-    <% end %>
-    <br>
-    <br>
-  </article>
+      <br>
+      <% unless 
+        (@current_user.following?(event.creator).nil? && event.creator.privacy == "private") 
+      %>
+        <%= event.details %>
+      <% end %>
+      <br>
+      <% if @current_user == event.creator %>
+        <%= event.users.collect { |user| user.full_name } %>
+      <% else %>
+        <%= event.users.collect { |user| 
+          # TODO: ORDER THIS
+          user.full_name if user.privacy == "public" || @current_user.following?(user)
+        } %>
+      <% end %>
+      <br>
+      <% unless 
+        (@current_user.following?(event.creator).nil? && event.creator.privacy == "private")
+      %>
+        <%= event.where %>
+      <% end %>
+      <br>
+      <%= event.friendly_date %>
+      <br>
+      <%= event.friendly_hour %>
+      <br>
+
+      <% if event.creator == @current_user %>
+      <% elsif event.creator.privacy == "public" || @current_user.following?(event.creator) %>
+        <span class="join_event"><%= current_user.get_going_label(event) if current_user %></span>
+      <% elsif event.creator.privacy == "private" && @current_user.following?(event.creator).nil? %>
+        To go to this event you must follow <%= link_to event.creator.full_name, profile_path(rendered_event.creator) %>
+      <% end %>
+
+      <br>
+      <br>
+    </article>
+  <% end %>
+
 <% end %>
 
 
