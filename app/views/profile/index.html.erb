@@ -45,7 +45,7 @@
       <%= link_to event.creator.full_name, profile_path(event.creator) %>
       <br>
       <% unless 
-        (@current_user.following?(event.creator).nil? && event.creator.privacy == "private") 
+        (@current_user && @current_user.following?(event.creator).nil? && event.creator.privacy == "private") 
       %>
         <%= event.details %>
       <% end %>
@@ -60,7 +60,7 @@
       <% end %>
       <br>
       <% unless 
-        (@current_user.following?(event.creator).nil? && event.creator.privacy == "private")
+        (@current_user && @current_user.following?(event.creator).nil? && event.creator.privacy == "private")
       %>
         <%= event.where %>
       <% end %>
