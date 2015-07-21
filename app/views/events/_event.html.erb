@@ -1,16 +1,52 @@
-<article id="<%= event.id %>" >
-  <%= link_to event.creator.full_name, profile_path(event.creator) %>
+<article  >
+
+  <%= image_tag(rendered_event.feed_creator.image.small) %>
+  <br>  
+  <%= link_to rendered_event.feed_creator.full_name, profile_path(rendered_event.feed_creator) %>
+  <br>
+  <%= rendered_event.hours_ago %>h<br>  
 
   <br>
-  <%= image_tag(event.image.small)%><br>
-  <%= event.details %>
+  <%= image_tag(rendered_event.image.small)%>
   <br>
-  <%= event.users.collect { |user| user.full_name } %>
+  
+  <% unless 
+    (@current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private") 
+  %>
+    <%= rendered_event.details %>
+  <% end %>
   <br>
-  <%= event.where %> | <%= event.friendly_date %> at <%= event.friendly_hour %>
+
+  <% if rendered_event.creator == @current_user %>
+    <%= rendered_event.assistants.collect { |user| user.full_name } %>
+  <% else %>
+    <%= rendered_event.assistants.collect { |user| 
+      # TODO: ORDER THIS
+      user.full_name if user.privacy == "public" || @current_user.following?(user)
+    } %>
+  <% end %>
+
   <br>
-  <% if user_signed_in? && event.creator != current_user %>
-    <span class="join_event"><%= event.going_or_join %></span>
+  <% unless 
+    (@current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private")
+  %>
+    <%= rendered_event.where %>
+  <% end %>
+  <br>
+  <%= rendered_event.friendly_date %>
+  <br>
+  <%= rendered_event.friendly_hour %>
+  <br>
+  Event from <%= link_to rendered_event.creator.full_name, profile_path(rendered_event.creator) %>
+  <br>
+  Total assistants <%= rendered_event.assistants.count %>
+  <br>
+
+  <% if rendered_event.creator == @current_user %>
+  <% elsif rendered_event.creator.privacy == "public" || @current_user.following?(rendered_event.creator) %>
+    <span class="join_event"><%= rendered_event.going_label %></span>
+  <% elsif rendered_event.creator.privacy == "private" && @current_user.following?(rendered_event.creator).nil? %>
+    To go to this event you must follow <%= link_to rendered_event.creator.full_name, profile_path(rendered_event.creator) %>
   <% end %>
   <br>
   <br>

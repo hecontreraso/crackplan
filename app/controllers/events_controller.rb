@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
+
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :join, :edit, :create, :update, :destroy]
+  before_action :authenticate_user!, only: [:toggle_assistance, :index, :join, :edit, :create, :update, :destroy]
   
   layout "internal"
 
@@ -15,13 +16,30 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @event = Event.new
+    @current_user = current_user
+
+    feeds = current_user.feeds.sort.reverse
     
-    feeds = current_user.feeds.sort
-    @events = [] + feeds.collect{ |feed| feed.event }
- 
-    @events.collect do |event|
-      event.going_or_join = current_user.get_going_label(event)
+    @rendered_events = []
+
+    feeds.collect do |feed|
+      rendered_event = RenderedEvent.new
+
+      rendered_event.event_id = feed.event.id
+      rendered_event.feed_creator = feed.feed_creator
+      rendered_event.hours_ago = ((Time.now - feed.created_at) / 1.hour).round
+      rendered_event.image = feed.event.image
+      rendered_event.creator = feed.event.creator
+      rendered_event.details = feed.event.details
+      rendered_event.assistants = feed.event.users
+      rendered_event.where = feed.event.where
+      rendered_event.friendly_date = feed.event.friendly_date
+      rendered_event.friendly_hour = feed.event.friendly_hour
+      rendered_event.going_label = current_user.get_going_label(feed.event)
+
+      @rendered_events << rendered_event
     end
+
   end
 
   # GET /events/1

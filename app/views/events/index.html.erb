@@ -1,5 +1,9 @@
 <%= render 'form' %>
 
 <section id="events">
-  <%= render @events %>
+
+	<% @rendered_events.each do |rendered_event| %>
+  	<%= render 'event', rendered_event: rendered_event %>
+	<% end%>
+
 </section>

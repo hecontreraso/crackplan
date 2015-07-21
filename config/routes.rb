@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  
   resources :events, except: [:new]
-
+  
   devise_for :users, controllers: { sessions: "users/sessions" }
   
   devise_scope :user do

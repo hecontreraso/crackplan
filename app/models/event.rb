@@ -23,10 +23,6 @@ class Event < ActiveRecord::Base
 
 	validates :creator_id, presence: true
 	validates :date, presence: true, timeliness: { type: :date, after: Date.today, after_message: "Events can only be created from tomorrow" }
-
-	attr_accessor :going_or_join
-	attr_accessor :sort_time
-	attr_accessor :event_by
 	
 	# Avatar uploader using carrierwave
   mount_uploader :image, EventImageUploader
@@ -36,24 +32,17 @@ class Event < ActiveRecord::Base
   ########################### DECORATORS ###########################
   
   def friendly_date
-    date.strftime("%b %d")
+    if date == Date.today
+      return "Today"
+    elsif date == Date.tomorrow
+      return "Tomorrow"
+    else
+      return date.strftime("%b %d")
+    end
   end
 
   def friendly_hour
     time.strftime("%l:%M%P") unless time.nil?
-  end
-
-  #Returns how long ago the event was created
-  def time_created
-    dif = ((Time.now - created_at) / 1.hour).round
-    if dif < 24
-      return "#{dif}h"
-    elsif dif < 168
-      w = (dif/24).floor
-      return "#{w}d"
-    else 
-      return ">1w"
-    end
   end
 
   private

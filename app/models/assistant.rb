@@ -17,7 +17,6 @@ class Assistant < ActiveRecord::Base
 
   private
     def notify_followers
-			Feed.create(user_id: user_id, event_id: event_id, feed_creator_id: user_id)	
       followers = User.find(user_id).followers
       followers.each do |follower|
         Feed.create(user_id: follower.id, event_id: event_id, feed_creator_id: user_id) 

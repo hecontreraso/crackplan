@@ -56,7 +56,8 @@ class User < ActiveRecord::Base
   validates :gender, presence: true, inclusion: [ "Male", "Female" ]
 	validates :privacy, presence: true, inclusion: [ "private", "public" ]
 
-  attr_accessor :follow_or_unfollow
+  # A user follows himself
+  after_create :follow_himself
 
   #TODO FIX THIS ACCESOR AND MAKE ACTIVERECORD WORK
   def followers
@@ -67,14 +68,14 @@ class User < ActiveRecord::Base
     User.where(id: follower_ids)
   end
 
-  def get_going_label(event)
-    relationship = Assistant.find_by(event_id: event.id, user_id: id)
-    relationship.nil? ? "Join" : "Going"
-  end
-
   # Returns true if the current user is following the other user.
   def is_going_to?(event)
   	events.include?(event)
+  end
+
+  def get_going_label(event)
+    relationship = Assistant.find_by(event_id: event.id, user_id: id)
+    relationship.nil? ? "Join" : "Going"
   end
 
   def get_relationship_label(other_user)
@@ -171,5 +172,11 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  private
+    def follow_himself
+      Follow.create(follower_id: id, followed_id: id, status: "following")
+      Rails.logger.debug { "USER FOLLOWS HIMSELF" }
+    end
 
 end

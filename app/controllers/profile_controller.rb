@@ -1,6 +1,6 @@
 class ProfileController < ApplicationController
 
-	# before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:toggle_follow]
 
 	layout "internal"
 
@@ -10,14 +10,11 @@ class ProfileController < ApplicationController
 		@user = set_user
 
 		if user_signed_in?
-			@is_current_user_profile = (@user.id == current_user.id) ? true : false
-			@user.follow_or_unfollow = current_user.get_relationship_label(@user)
+			@current_user = current_user
+			@follow_or_unfollow = current_user.get_relationship_label(@user)
 		end
 
 		@events = @user.events
-		@events.collect do |event|
-			event.going_or_join = current_user.get_going_label(event)	if current_user
-		end
 	end
 
 	def toggle_follow

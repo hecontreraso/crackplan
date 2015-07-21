@@ -42,7 +42,7 @@ Follow.create(follower_id: 8, followed_id: 10, status: :following)
 
 Follow.create(follower_id: 9, followed_id: 6, status: :following)
 Follow.create(follower_id: 9, followed_id: 7, status: :following)
-Follow.create(follower_id: 9, followed_id: 9, status: :following)
+Follow.create(follower_id: 9, followed_id: 8, status: :following)
 Follow.create(follower_id: 9, followed_id: 10, status: :following)
 
 Event.create(creator_id: 1, date: Date.today + 5.days, time: Time.new(2015, 7, 5, 9, 0, 0), created_at: (DateTime.now), image: "1.jpg", details: "We're going to celebrate the end of angelhack 2015... We are gonna drink some beers!!!", where: "Bogota Beer Company")
@@ -64,9 +64,3 @@ Event.create(creator_id: 7, date: Date.today + 30.days, time: Time.new(2015, 7, 
 Event.create(creator_id: 7, date: Date.tomorrow, time: Time.new(2015, 7, 5, 10, 0, 0), created_at: (DateTime.now - 228.hour), image: "7.jpg", details: "Beer pong with super heroes and friends", where: "Mr Doom old headquarters")
 Event.create(creator_id: 8, date: Date.tomorrow, time: Time.new(2015, 7, 5, 11, 0, 0), created_at: (DateTime.now - 228.hour), image: "7.jpg", details: "Crossbow training", where: "The arrow guy is guiding us to the place")
 Event.create(creator_id: 8, date: Date.tomorrow, time: Time.new(2015, 7, 5, 13, 0, 0), created_at: (DateTime.now - 228.hour), image: "7.jpg", details: "Videogames plan! With blackjack and hookers", where: "Tony's Mansion")
-
-# Assistant.create(user_id: 2, event_id: 6)
-# Assistant.create(user_id: 3, event_id: 2)
-# Assistant.create(user_id: 3, event_id: 4)
-# Assistant.create(user_id: 3, event_id: 5)
-# Assistant.create(user_id: 3, event_id: 7)
