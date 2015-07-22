@@ -37,6 +37,11 @@
     <%= f.email_field :email, autofocus: true %>
   </div>
 
+  <%= label :privacy, 'Public' %>
+  <%= f.radio_button :privacy, 'public' %> 
+  <%= label :privacy, 'Private' %>
+  <%= f.radio_button :privacy, 'private' %>
+
   <div class="field">
     <%= f.label :current_password %><br />
     <%= f.password_field :current_password, autocomplete: "off" %>

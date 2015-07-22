@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
 			:image,
 			:email, 
 			:bio, 
+			:privacy, 
 			:current_password, 
 			:password, 
 			:password_confirmation
