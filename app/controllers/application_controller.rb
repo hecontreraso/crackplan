@@ -4,8 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 	before_filter :configure_permitted_parameters, if: :devise_controller?
-
-	helper_method :join_event
+	before_action :authenticate_user!, only: [:accept_follow_request, :decline_follow_request]
 
 	def configure_permitted_parameters
 		devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(
@@ -32,5 +31,22 @@ class ApplicationController < ActionController::Base
 			) 
 		}
 	end
+
+	def accept_follow_request
+		user = set_user
+    returned_state = current_user.accept_follow_request(user)
+    render json: { returned_state: returned_state }
+	end
+
+	def decline_follow_request
+    returned_state = current_user.decline_follow_request(set_user)
+    render json: { returned_state: returned_state }
+	end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
 
 end

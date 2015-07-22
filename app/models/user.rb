@@ -68,6 +68,15 @@ class User < ActiveRecord::Base
     User.where(id: follower_ids)
   end
 
+
+  def follow_requests
+    request_ids = []
+    Follow.where(followed_id: id, status: :requested).each do |follow|
+      request_ids << follow.follower_id
+    end
+    User.where(id: request_ids)
+  end
+
   # Returns true if the current user is following the other user.
   def is_going_to?(event)
   	events.include?(event)
@@ -143,11 +152,26 @@ class User < ActiveRecord::Base
       if relationship.status == "blocked"
         relationship.destroy      
       else
-        relationship.destroy
-        Follow.create(follower_id: id, followed_id: other_user.id, status: :blocked)
+        relationship.status = :blocked
+        relationship.save
       end
     else
       Follow.create(follower_id: id, followed_id: other_user.id, status: :blocked)
+    end
+  end
+
+  def accept_follow_request(other_user)
+    relationship = Follow.find_by(follower_id: other_user.id, followed_id: id)
+    if relationship && relationship.status == "requested"
+      relationship.status = "following"
+      relationship.save
+    end
+  end
+
+  def decline_follow_request(other_user)
+    relationship = Follow.find_by(follower_id: other_user.id, followed_id: id)
+    if relationship && relationship.status == "requested"
+      relationship.destroy
     end
   end
 
@@ -176,7 +200,6 @@ class User < ActiveRecord::Base
   private
     def follow_himself
       Follow.create(follower_id: id, followed_id: id, status: "following")
-      Rails.logger.debug { "USER FOLLOWS HIMSELF" }
     end
 
 end
