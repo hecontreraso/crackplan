@@ -6,25 +6,25 @@
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
+    <%= f.text_field :first_name, autofocus: true, placeholder: "First name" %>
   </div>
 
   <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name, placeholder: "Last name" %>
   </div>
 
   <div class="field">
-    <%= f.label :birthdate %><br />
-    <%= f.date_select(:birthdate, nidea: :quevaaqui, start_year: Date.current().year, end_year: 1915, prompt: { day: 'Day', month: 'Month', year: 'Year' } ) %>
+    <%= f.text_field :bio, placeholder: "Short bio about you" %>
   </div>
 
   <div class="field">
-    <%= f.radio_button(:gender, "Male") %>
-    <%= label_tag(:age_male, "Male") %>
-    <%= f.radio_button(:gender, "Female") %>
-    <%= label_tag(:age_female, "Female") %>
+    <%= f.date_select :birthdate, start_year: Date.current().year, end_year: 1915 %>
+  </div>
+
+  <div class="field">
+    <%= f.select(:gender) do %>
+      <%= options_for_select([['Gender', ''], ['Male', 'Male'], ['Female', 'Female'] ]) %>
+    <% end %>
   </div>
 
   <div class="field">
@@ -42,6 +42,18 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+  <div class="actions">
+    <%= f.submit "Update profile" %>
+  </div>
+<% end %>
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="field">
+    <%= f.label :current_password %><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
   <div class="field">
     <%= f.label :password %>
     <% if @validatable %>
@@ -49,17 +61,14 @@
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
-
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
-
   <div class="actions">
     <%= f.submit "Update profile" %>
   </div>
 <% end %>
-
 
 <h3>Cancel my account</h3>
 

@@ -15,6 +15,10 @@
   <br>
   <%= @user.following.count-1 %> Following
   <br>
+  Short bio:
+  <br>
+  <%= @user.bio %>
+  <br>
 
   <% if current_user.nil? %>
     <p>You must be logged in to see <%= @user.full_name %>'s profile</p>
