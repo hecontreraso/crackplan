@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   post '/profile/:id/toggle_follow' => 'profile#toggle_follow'
   get '/profile/:id' => 'profile#index', as: :profile
 
+  post '/profile/:id/accept_request' => 'application#accept_follow_request'
+  post '/profile/:id/decline_request' => 'application#decline_follow_request'
+
 
   get '/about' => 'pages#about'
   get '/terms' => 'pages#terms'

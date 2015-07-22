@@ -8,7 +8,7 @@ class EventsController < ApplicationController
   # POST /events/:id/toggle_assistance
   def toggle_assistance
     returned_state = current_user.toggle_assistance(set_event, current_user)
-    render json: { returned_state: returned_state }    
+    render json: { returned_state: returned_state }
   end 
   
 

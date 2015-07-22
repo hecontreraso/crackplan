@@ -1,9 +1,13 @@
 <%= render 'form' %>
 
-<section id="events">
+<section id="requests">
+	<% @current_user.follow_requests.each do |requesting_user| %>
+  	<%= render 'requests', requesting_user: requesting_user %>
+	<% end%>
+</section>
 
+<section id="events">
 	<% @rendered_events.each do |rendered_event| %>
   	<%= render 'event', rendered_event: rendered_event %>
 	<% end%>
-
 </section>
