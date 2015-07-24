@@ -11,24 +11,25 @@
   <br>
   
   <% unless 
-    (@current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private") 
+    (current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private") 
   %>
     <%= rendered_event.details %>
   <% end %>
+
   <br>
 
-  <% if rendered_event.creator == @current_user %>
+  <% if rendered_event.creator == current_user %>
     <%= rendered_event.assistants.collect { |user| user.full_name } %>
   <% else %>
     <%= rendered_event.assistants.collect { |user| 
       # TODO: ORDER THIS
-      user.full_name if user.privacy == "public" || @current_user.following?(user)
+      user.full_name if user.privacy == "public" || current_user.following?(user)
     } %>
   <% end %>
 
   <br>
   <% unless 
-    (@current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private")
+    (current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private")
   %>
     <%= rendered_event.where %>
   <% end %>
@@ -42,10 +43,10 @@
   Total assistants <%= rendered_event.assistants.count %>
   <br>
 
-  <% if rendered_event.creator == @current_user %>
-  <% elsif rendered_event.creator.privacy == "public" || @current_user.following?(rendered_event.creator) %>
+  <% if rendered_event.creator == current_user %>
+  <% elsif rendered_event.creator.privacy == "public" || current_user.following?(rendered_event.creator) %>
     <span class="join_event"><%= rendered_event.going_label %></span>
-  <% elsif rendered_event.creator.privacy == "private" && @current_user.following?(rendered_event.creator).nil? %>
+  <% elsif rendered_event.creator.privacy == "private" && current_user.following?(rendered_event.creator).nil? %>
     To go to this event you must follow <%= link_to rendered_event.creator.full_name, profile_path(rendered_event.creator) %>
   <% end %>
   <br>

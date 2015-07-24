@@ -1,7 +1,7 @@
 <%= render 'form' %>
 
 <section id="requests">
-	<% @current_user.follow_requests.each do |requesting_user| %>
+	<% current_user.follow_requests.each do |requesting_user| %>
   	<%= render 'requests', requesting_user: requesting_user %>
 	<% end%>
 </section>

@@ -10,7 +10,6 @@ class ProfileController < ApplicationController
 		@user = set_user
 
 		if user_signed_in?
-			@current_user = current_user
 			@follow_or_unfollow = current_user.get_relationship_label(@user)
 		end
 

@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
 
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:toggle_assistance, :index, :join, :edit, :create, :update, :destroy]
-  
+  before_action :authenticate_user!
+
   layout "internal"
 
   # POST /events/:id/toggle_assistance
@@ -16,7 +16,6 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @event = Event.new
-    @current_user = current_user
 
     feeds = current_user.feeds.sort.reverse
     

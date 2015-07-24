@@ -8,8 +8,12 @@
 
 AWS_ACCESS_KEY_ID: "AKIAIHQWYIHUDNPTRMIA"
 AWS_SECRET_ACCESS_KEY: "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"
+GMAIL_DOMAIN: gmail.com
+GMAIL_USERNAME: hecontreraso
+GMAIL_PASSWORD: wncfllkdkqyepmkh
 
 development:
   AWS_BUCKET: crankplan-d
 production:
   AWS_BUCKET: crankplan-p
+
