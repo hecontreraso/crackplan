@@ -1,54 +1,67 @@
-<article id="<%= rendered_event.event_id %>">
-
-  <%= image_tag(rendered_event.feed_creator.image.small) %>
-  <br>  
-  <%= link_to rendered_event.feed_creator.full_name, profile_path(rendered_event.feed_creator) %>
-  <br>
-  <%= rendered_event.hours_ago %>h<br>  
-
-  <br>
-  <%= image_tag(rendered_event.image.small)%>
-  <br>
-  
-  <% unless 
-    (current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private") 
-  %>
-    <%= rendered_event.details %>
-  <% end %>
-
-  <br>
-
-  <% if rendered_event.creator == current_user %>
-    <%= rendered_event.assistants.collect { |user| user.full_name } %>
-  <% else %>
-    <%= rendered_event.assistants.collect { |user| 
-      # TODO: ORDER THIS
-      user.full_name if user.privacy == "public" || current_user.following?(user)
-    } %>
-  <% end %>
-
-  <br>
-  <% unless 
-    (current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private")
-  %>
-    <%= rendered_event.where %>
-  <% end %>
-  <br>
-  <%= rendered_event.friendly_date %>
-  <br>
-  <%= rendered_event.friendly_hour %>
-  <br>
-  Event from <%= link_to rendered_event.creator.full_name, profile_path(rendered_event.creator) %>
-  <br>
-  Total assistants <%= rendered_event.assistants.count %>
-  <br>
-
-  <% if rendered_event.creator == current_user %>
-  <% elsif rendered_event.creator.privacy == "public" || current_user.following?(rendered_event.creator) %>
-    <span class="join_event"><%= rendered_event.going_label %></span>
-  <% elsif rendered_event.creator.privacy == "private" && current_user.following?(rendered_event.creator).nil? %>
-    To go to this event you must follow <%= link_to rendered_event.creator.full_name, profile_path(rendered_event.creator) %>
-  <% end %>
-  <br>
-  <br>
-</article>
+<article id="<%= rendered_event.event_id %>" class="panel panel-default row">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <ul class="nav navbar-nav ">
+      <li><%= image_tag(rendered_event.feed_creator.image.small, class: "avatar-radius") %></li>
+      <li><%= link_to rendered_event.feed_creator.full_name, profile_path(rendered_event.feed_creator), class: "username" %></li> 
+      <p class="time"><%= rendered_event.hours_ago %>h</p>
+    </ul>
+  </div>
+  <div class="panel-body ">
+    <a class="col-md-12 paneles" href="">
+      <%= image_tag(rendered_event.image.small, class: "col-md-12 paneles")%>
+    </a>
+  </div>
+  <ul class="list-group ">
+    <li class="list-group-item ime">
+      <div class="col-md-12">
+        <p>
+          <% unless 
+              (current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private") 
+          %>
+            <%= rendered_event.details %>
+          <% end %>              
+        </p>
+      </div>
+      <br>
+      <div class="col-md-12">
+        <p class="username col-md-1">
+          <% if rendered_event.creator == current_user %>
+            <%= rendered_event.assistants.collect { |user| user.full_name } %>
+          <% else %>
+            <%= rendered_event.assistants.collect { |user| 
+              # TODO: ORDER THIS
+              user.full_name if user.privacy == "public" || current_user.following?(user)
+            } %>
+          <% end %>
+          <p class="coma">,</p>
+        </p>
+        <br>
+        <% unless 
+          (current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private")
+        %>
+          <%= rendered_event.where %>
+        <% end %>
+        <br>
+        <%= rendered_event.friendly_date %>
+        <br>
+        <%= rendered_event.friendly_hour %>
+        <br>
+        Event from <%= link_to rendered_event.creator.full_name, profile_path(rendered_event.creator) %>
+        <br>
+        Total assistants <%= rendered_event.assistants.count %>
+        <br>
+      </div>
+      <div class="col-md-12 text-center">
+        <% if rendered_event.creator == current_user %>
+        <% elsif rendered_event.creator.privacy == "public" || current_user.following?(rendered_event.creator) %>
+          <span class="join_event btn btn-default botongoin">
+            <%= rendered_event.going_label %>
+          </span>
+        <% elsif rendered_event.creator.privacy == "private" && current_user.following?(rendered_event.creator).nil? %>
+          To go to this event you must follow <%= link_to rendered_event.creator.full_name, profile_path(rendered_event.creator) %>
+        <% end %>
+      </div>
+    </li>   
+  </ul>
+</article> 

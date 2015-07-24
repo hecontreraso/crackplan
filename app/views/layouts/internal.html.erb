@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
-  <title>Crankplan</title>
+  <title>Crackplan</title>
   <%= stylesheet_link_tag 'application', params[:controller], :media => "all",'data-turbolinks-track' => true %>
   <%= javascript_include_tag "application", params[:controller], 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -10,35 +10,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta charset="utf-8">
 </head>
-<body class="<%= controller_name %> <%= action_name %>">
-
-  <div class="row">
-    <nav>
-
-      <div id="barraNavegacion" >
-        <%= link_to image_tag("https://s3.amazonaws.com/crankplan-p/crackplan_logo.png"), events_path %>
-    
-        <div class="right">
-          <% if user_signed_in? %>
-            <%= link_to current_user.full_name, profile_path(current_user) %>
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-          <% else %>
-            <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-            <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-          <% end %>
+<body>
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-lg-offset-2 col-lg-8">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <img alt="logo" id="logo-crackplan" src="https://s3.amazonaws.com/crankplan-p/header_logo.png">
+            </div>  
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                <% if current_user%>
+                  <li><%= image_tag(current_user.image.small, class: "profile-avatar") %></li>
+                  <li>
+                    <%= link_to current_user.full_name, profile_path(current_user), class: 'username' %>
+                    <%= link_to "Log Out", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
+                  </li>
+                <% end %>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div>
         </div>
-      </div>
-    
+      </div><!-- /.container-fluid -->
     </nav>
+  </header>
 
-    <% if notice %>
-      <p class="alert alert-notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-error"><%= alert %></p>
-    <% end %>
+  <% if notice %>
+    <p class="alert alert-notice"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-error"><%= alert %></p>
+  <% end %>
 
-    <%= yield %>
-  </div>
+  <%= yield %>
+
 </body>
 </html>

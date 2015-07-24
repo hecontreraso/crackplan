@@ -47,6 +47,7 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bower-rails (0.10.0)
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
@@ -278,6 +279,7 @@ PLATFORMS
 DEPENDENCIES
   airbrake
   annotate (~> 2.6.6)
+  bower-rails
   byebug
   carrierwave
   devise

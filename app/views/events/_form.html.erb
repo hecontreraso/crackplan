@@ -1,24 +1,42 @@
-<%= form_for(@event, remote: true) do |f| %>
-  <% if @event.errors.any? %>
-    <%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:
-
-    <% @event.errors.full_messages.each do |message| %>
-      <%= message %>
+<div class="text-center">
+  <div class="panel panel-default row">
+    <%= form_for(@event, html: {class: "col-md-12"}) do |f| %>
+      <% if @event.errors.any? %>
+        <%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:
+        <% @event.errors.full_messages.each do |message| %>
+          <%= message %>
+        <% end %>
+      <% end %>
+      <div class="form-group row">
+        <div class=" col-md-6 margen ">
+          <%= f.text_area :details, placeholder: 'Plan details...', class: "form-control col-md-offset-6" %>
+        </div>   
+      </div>
+      <div class="form-group row">
+        <div class="col-md-6 margen">
+          <%= f.text_field :where, class: "form-control col-md-offset-6", placeholder: 'Where? (Add a place)' %>
+        </div> 
+      </div>
+      <div class="form-group row">
+        <div class="col-md-6 col-md-offset-3 ">
+          <div class="row">
+            <div class="col-md-3  cort margen">
+              <%= f.date_field(:date, min: Date.today, class: "form-control") %>
+            </div>
+            <div class="col-md-4 cort margen">
+              <%= f.text_field :time, id: "event_time", class:"form-control", placeholder: 'Now add a time!' %>
+            </div>
+            <div class="col-md-5 margen">
+              <div id="botonadd" class=" pos btn btn-default botongoin col-md-4  col-sm-12 col-xs-12">
+                <span class="botonimagen">Add a event photo</span>  
+                <%= f.file_field :image, class: "botongoi" %>
+              </div>
+            </div>
+          </div>     
+        </div>
+      </div>
+      <%= token_tag form_authenticity_token %>
+      <%= f.submit "Create", class: "btn btn-default botongoin" %>
     <% end %>
-  <% end %>
-
-  <%= f.text_area :details, placeholder: 'Plan details...' %>
-  <br>
-  <%= f.text_field :where, placeholder: 'Where? (Add a place)' %>
-  <br>
-  <%= f.date_field(:date, min: Date.today) %>
-  <br>
-  <%= f.text_field :time, id: "event_time", placeholder: 'Now add a time!' %>
-  <br>
-  <%= f.file_field :image %>
-  <%= token_tag form_authenticity_token %>
-  <br>
-  <%= f.submit "Create" %>
-  <br>
-  <br>
-<% end %>
+  </div>
+</div> 

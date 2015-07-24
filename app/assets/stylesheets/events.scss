@@ -1,3 +1,67 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+form{
+  margin-bottom: 20px;
+}
+
+
+.margen{
+  margin: 0 auto!important;
+  padding: 0px!important;
+}
+
+.avatar-radius{
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+
+.form-control {
+    height: 46px;
+    margin-top: 22px!important;
+}
+.cort {
+    padding-right: 5px!important;
+}
+
+
+#botonadd {
+  width: 100% !important;
+  height: 46px !important;
+  margin-top: 22px !important;
+  border: 1px solid #CCCCCC !important;
+  color: #ccc;
+  line-height: 26px;
+}
+
+.botongoi{
+
+    position: absolute!important;
+    top: 0!important;
+    right: 0!important;
+    margin: 0!important;
+    padding: 0!important;
+    font-size: 20px!important;
+    cursor: pointer!important;
+    opacity: 0!important;
+    filter: alpha(opacity=0)!important;
+
+}
+
+.coma{
+  width: 13px;
+    float: left;
+}
+.ime{
+      min-height: 160px;
+      height: auto;
+}
+.time{
+      float: right;
+    position: absolute;
+    right: 40px;
+    top: 28px;
+    color: #B3B3B3;
+}

@@ -1,13 +1,24 @@
-<%= render 'form' %>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-lg-offset-2 col-lg-8">
+			<%= render 'form' %>
 
-<section id="requests">
-	<% current_user.follow_requests.each do |requesting_user| %>
-  	<%= render 'requests', requesting_user: requesting_user %>
-	<% end%>
-</section>
+			<section id="requests">
+				<% current_user.follow_requests.each do |requesting_user| %>
+			  	<%= render 'requests', requesting_user: requesting_user %>
+				<% end%>
+			</section>
 
-<section id="events">
-	<% @rendered_events.each do |rendered_event| %>
-  	<%= render 'event', rendered_event: rendered_event %>
-	<% end%>
-</section>
+			<section id="events">
+				<% @rendered_events.each do |rendered_event| %>
+			  	<%= render 'event', rendered_event: rendered_event %>
+				<% end%>
+			</section>
+
+			<div class="col-md-12 text-center">
+			  <input class="btn btn-default botongoin" type="submit" value="Load more">
+			</div>
+
+		</div>
+	</div>
+</div>
