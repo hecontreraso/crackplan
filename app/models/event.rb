@@ -29,6 +29,22 @@ class Event < ActiveRecord::Base
 
   after_save :assist_to_event
 
+  # Get all the assistants of an event that an specific user can see
+  def get_visible_followers(target_user)
+    assistants = []
+    # If I'm the creator, I can see all assistants
+    if target_user == creator
+      assistants == users
+    # If I'm following the creator or the creator has a public profile, I can see all assistants but private or following
+    elsif (target_user.following?(creator) || creator.privacy == "public")
+      users.collect { |user| 
+        # TODO: ORDER THIS
+        assistants << user if (user.privacy == "public" || target_user.following?(user))
+      }
+    end
+    assistants
+  end
+
   ########################### DECORATORS ###########################
   
   def friendly_date
