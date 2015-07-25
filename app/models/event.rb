@@ -34,7 +34,7 @@ class Event < ActiveRecord::Base
     assistants = []
     # If I'm the creator, I can see all assistants
     if target_user == creator
-      assistants == users
+      assistants = users
     # If I'm following the creator or the creator has a public profile, I can see all assistants but private or following
     elsif (target_user.following?(creator) || creator.privacy == "public")
       users.collect { |user| 

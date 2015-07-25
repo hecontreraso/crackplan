@@ -27,7 +27,7 @@
 
       <br>
 
-      <% limit_assistants_shown = 3 %>
+      <% limit_assistants_shown = 5 %>
       <% if rendered_event.assistants.count == 1 %>
         <%= link_to rendered_event.assistants.first.full_name, profile_path(rendered_event.assistants.first), class: "assistant-name" %> is going
 
