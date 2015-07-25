@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.timepicker
+//= require bootstrap/dist/js/bootstrap
 //= require turbolinks
 // require_tree .
