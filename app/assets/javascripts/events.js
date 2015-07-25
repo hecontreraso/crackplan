@@ -5,6 +5,7 @@ ready = function() {
 
 	$('#event_time').timepicker({ 'minTime': '5:00am', 'maxTime': '11:00pm' });
 
+	//Used to join an event
 	$(".join_event").click(function(){
 		var join_button = $(event.target);
 		var id = join_button.closest("article").attr("id");
@@ -14,6 +15,7 @@ ready = function() {
     }, "json");
 	});
 
+	//Used to accept a following request
 	$(".accept").click(function(){
 		var accept_button = $(event.target);
 		var id = accept_button.closest("article").attr("id");
@@ -23,6 +25,7 @@ ready = function() {
     }, "json");
 	});
 
+	//Used to decline a following request
 	$(".decline").click(function(){
 		var decline_button = $(event.target);
 		var id = decline_button.closest("article").attr("id");
@@ -31,6 +34,12 @@ ready = function() {
 			$("#" + id).remove();    
     }, "json");
 	});
+
+	// This makes work the tooltip for "3 more" on event assistants
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip({ html: true })
+	});
+
 
 };
 
