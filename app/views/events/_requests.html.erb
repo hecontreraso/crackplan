@@ -3,7 +3,7 @@
 	<div class="request-username-wrapper">	
 		<%= image_tag(requesting_user.image.medium, class: "img-request-avatar") %>
 	  <div class="username-request">
-		  <span class="name-request"><%= requesting_user.full_name %></span><br>
+		  <span class="name-request"><%= link_to requesting_user.full_name, profile_path(requesting_user), class: "username" %></span><br>
 	  	<span class="wants-to">Wants to follow you</span>
 		  <div class="request-buttons">	
 			  <img src="https://s3.amazonaws.com/crankplan-p/confirm.png" class="button-request accept-request">
