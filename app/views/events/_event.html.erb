@@ -1,89 +1,85 @@
-<article id="<%= rendered_event.event_id %>" class="panel panel-default row">
-  <!-- Default panel contents -->
-  <div class="panel-heading">
-    <ul class="nav navbar-nav ">
-      <li>
-        <%= image_tag(rendered_event.feed_creator.image.small, class: "avatar-radius") %>
-      </li>
-      <li>
-        <%= link_to rendered_event.feed_creator.full_name, profile_path(rendered_event.feed_creator), class: "username" %>
-      </li> 
-    </ul>
-    <p class="time"><%= rendered_event.hours_ago %>h</p>
+<article id="<%= rendered_event.event_id %>" class="event-container">
+
+  <div class="event-heading">
+    <%= image_tag(rendered_event.feed_creator.image.small, class: "avatar-radius") %>
+    <%= link_to rendered_event.feed_creator.full_name, profile_path(rendered_event.feed_creator), class: "username" %>
+    <span class="time"><%= rendered_event.hours_ago %>h</span>
   </div>
 
   <div class="panel-body">
-    <%= image_tag(rendered_event.image.small, class: "col-md-12 paneles")%>
+    <%= image_tag(rendered_event.image.small, class: "col-100 paneles")%>
   </div>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <p>
-        <% unless 
-            (current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private") 
-        %>
-          <%= rendered_event.details %>
-        <% end %>              
-      </p>
-
-      <br>
-
-      <% limit_assistants_shown = 5 %>
-      <% if rendered_event.assistants.count == 1 %>
-        <%= link_to rendered_event.assistants.first.full_name, profile_path(rendered_event.assistants.first), class: "assistant-name" %> is going
-
-      <% elsif rendered_event.assistants.count <= limit_assistants_shown %>
-        <% all_but_last_two = rendered_event.assistants[0, (rendered_event.assistants.count-2)] %>
-        <% last_two = rendered_event.assistants[rendered_event.assistants.count-2, 2] %>
-
-        <% all_but_last_two.each { |user| %> 
-          <%= link_to user.full_name, profile_path(user), class: "assistant-name" %>,
-        <% } %>
-        <%= link_to last_two.first.full_name, profile_path(last_two.first), class: "assistant-name" %> and
-        <%= link_to last_two.last.full_name, profile_path(last_two.last), class: "assistant-name" %> are going
-
-      <% else %>
-        <% showed_assistants = rendered_event.assistants[0, limit_assistants_shown] %>
-        <% hidden_assistants = rendered_event.assistants[limit_assistants_shown, rendered_event.assistants.count - limit_assistants_shown] %>
-        <% showed_assistants.each { |user| %> 
-          <%= link_to user.full_name, profile_path(user), class: "assistant-name" %>,
-        <% } %> and
-        <% tooltip = "" %> 
-        <% hidden_assistants.each { |user| %> 
-          <% tooltip += "#{user.full_name}<br>" %>
-        <% } %>
-
-        <span class="assistant-name" data-toggle="tooltip" data-placement="top" title="<%= tooltip%>">
-          <%= rendered_event.assistants.count - limit_assistants_shown %> more
-        </span> are going
-      <% end %>
-      <br>
+  <div class="event-bottom">
+    <p>
       <% unless 
-        (current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private")
+          (current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private") 
       %>
-        <%= rendered_event.where %> |
+        <%= rendered_event.details %>
+      <% end %>              
+    </p>
+
+    <br>
+
+    <% limit_assistants_shown = 5 %>
+    <% if rendered_event.assistants.count == 0 %>
+    <% elsif rendered_event.assistants.count == 1 %>
+      <%= link_to rendered_event.assistants.first.full_name, profile_path(rendered_event.assistants.first), class: "assistant-name" %> is going
+
+    <% elsif rendered_event.assistants.count <= limit_assistants_shown %>
+      <% all_but_last_two = rendered_event.assistants[0, (rendered_event.assistants.count-2)] %>
+      <% last_two = rendered_event.assistants[rendered_event.assistants.count-2, 2] %>
+
+      <% all_but_last_two.each { |user| %> 
+        <%= link_to user.full_name, profile_path(user), class: "assistant-name" %>,
+      <% } %>
+      <%= link_to last_two.first.full_name, profile_path(last_two.first), class: "assistant-name" %> and
+      <%= link_to last_two.last.full_name, profile_path(last_two.last), class: "assistant-name" %> are going
+
+    <% else %>
+      <% showed_assistants = rendered_event.assistants[0, limit_assistants_shown] %>
+      <% hidden_assistants = rendered_event.assistants[limit_assistants_shown, rendered_event.assistants.count - limit_assistants_shown] %>
+      <% showed_assistants.each { |user| %> 
+        <%= link_to user.full_name, profile_path(user), class: "assistant-name" %>,
+      <% } %> and
+      <% tooltip = "" %> 
+      <% hidden_assistants.each { |user| %> 
+        <% tooltip += "#{user.full_name}<br>" %>
+      <% } %>
+
+      <span class="assistant-name" data-toggle="tooltip" data-placement="top" title="<%= tooltip%>">
+        <%= rendered_event.assistants.count - limit_assistants_shown %> more
+      </span> are going
+    <% end %>
+
+    <br>
+    
+    <% unless 
+      (current_user.following?(rendered_event.creator).nil? && rendered_event.creator.privacy == "private")
+    %>
+      <%= rendered_event.where %> |
+    <% end %>
+    <%= rendered_event.friendly_date %>
+
+    <% unless rendered_event.friendly_hour.nil? %>
+      at <%= rendered_event.friendly_hour %>
+    <% end %>
+    <br>
+    <span class="event-from">Event from</span> <%= link_to rendered_event.creator.full_name, profile_path(rendered_event.creator) %>
+    <br>
+    <span>Total assistants: </span><%= rendered_event.assistants.count %>
+
+    <br>
+    <br>
+
+    <div class="text-center">
+      <% if rendered_event.creator == current_user %>
+      <% elsif rendered_event.creator.privacy == "public" || current_user.following?(rendered_event.creator) %>
+        <span class="join_event btn btn-join">
+          <%= rendered_event.going_label %>
+        </span>
+      <% elsif rendered_event.creator.privacy == "private" && current_user.following?(rendered_event.creator).nil? %>
+        To go to this event you must follow <%= link_to rendered_event.creator.full_name, profile_path(rendered_event.creator) %>
       <% end %>
-      <%= rendered_event.friendly_date %>
-
-      <% unless rendered_event.friendly_hour.nil? %>
-        at <%= rendered_event.friendly_hour %>
-      <% end %>
-      <br>
-      <span>Event from</span> <%= link_to rendered_event.creator.full_name, profile_path(rendered_event.creator) %>
-      <br>
-      Total assistants <%= rendered_event.assistants.count %>
-
-      <br>
-
-      <div class="col-md-12 text-center">
-        <% if rendered_event.creator == current_user %>
-        <% elsif rendered_event.creator.privacy == "public" || current_user.following?(rendered_event.creator) %>
-          <span class="join_event btn btn-join">
-            <%= rendered_event.going_label %>
-          </span>
-        <% elsif rendered_event.creator.privacy == "private" && current_user.following?(rendered_event.creator).nil? %>
-          To go to this event you must follow <%= link_to rendered_event.creator.full_name, profile_path(rendered_event.creator) %>
-        <% end %>
-      </div>
-    </li>   
-  </ul>
+    </div>
+  </div>
 </article> 

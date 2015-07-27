@@ -30,7 +30,7 @@ class EventsController < ApplicationController
       rendered_event.image = feed.event.image
       rendered_event.creator = feed.event.creator
       rendered_event.details = feed.event.details
-      rendered_event.assistants = feed.event.get_visible_followers(current_user)
+      rendered_event.assistants = feed.event.get_visible_assistants(current_user)
       rendered_event.where = feed.event.where
       rendered_event.friendly_date = feed.event.friendly_date
       rendered_event.friendly_hour = feed.event.friendly_hour

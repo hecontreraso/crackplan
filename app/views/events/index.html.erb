@@ -1,20 +1,24 @@
-<div class="container">
-	<div class="row">
-		<div class="col-xs-12 col-lg-offset-2 col-lg-8">
-			<%= render 'form' %>
+<div class="col-eventos">
 
-			<section id="requests">
-				<% current_user.follow_requests.each do |requesting_user| %>
-			  	<%= render 'requests', requesting_user: requesting_user %>
-				<% end%>
-			</section>
+<!-- 		  <% if notice %>
+	    <p class="alert alert-notice"><%= notice %></p>
+	  <% end %>
+	  <% if alert %>
+	    <p class="alert alert-error"><%= alert %></p>
+	  <% end %> -->
+  
+	<%= render 'form' %>
 
-			<section id="events">
-				<% @rendered_events.each do |rendered_event| %>
-			  	<%= render 'event', rendered_event: rendered_event %>
-				<% end%>
-			</section>
+	<section id="requests">
+		<% current_user.follow_requests.each do |requesting_user| %>			
+  		<%= render 'requests', requesting_user: requesting_user %>
+		<% end%>
+	</section>
 
-		</div>
-	</div>
+	<section id="events">
+		<% @rendered_events.each do |rendered_event| %>
+	  	<%= render 'event', rendered_event: rendered_event %>
+		<% end%>
+	</section>
+
 </div>

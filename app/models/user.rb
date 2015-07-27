@@ -194,7 +194,12 @@ class User < ActiveRecord::Base
 
   #Returns the user full name
   def full_name
-    "#{first_name} #{last_name}"
+    if "#{first_name} #{last_name}".length <= 20
+      "#{first_name} #{last_name}"
+    else
+      "#{first_name}"
+    end
+
   end
 
   private

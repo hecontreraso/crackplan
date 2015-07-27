@@ -1,0 +1,133 @@
+$form-fields-heigth: 50px;
+$standard-blue: #1F9BD0;
+
+.edit-form-wrapper{
+  background-color: white;
+  box-shadow: 0 0px 3px gray;
+  padding: 15px;
+  margin-top: 20px;
+  p{
+    color: gray;
+  }
+}
+.btn-submit-blue{
+  margin-bottom: 10px;
+  color: white;
+  background-color: $standard-blue; 
+  padding: 0;
+  height: $form-fields-heigth;
+  width: 130px;
+}
+
+
+form{
+  text-align: center;
+  margin: auto;
+  .form-control {
+    height: $form-fields-heigth;
+    margin-top: 5px;
+  }
+  #form-image-profile{
+    width: 125px;
+    border-radius: 50%;
+  }
+  .col-30{
+    width: 33.3%;
+    float: left;
+  }
+  #btn-add-photo-wrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: white;
+    background-color: $standard-blue; 
+    padding: 0;
+    display: flex;
+    position: relative;
+    span{
+      width: 100%;
+      margin-top: 14px;
+      position: absolute;
+    }
+    input[type="file"] {
+      width: 100%;
+      height: $form-fields-heigth;
+      opacity: 0;
+      position: relative;
+    }
+  }
+} 
+
+#cancel-account-container{
+  float: left;
+  display: inline-block;
+  margin-left: 20px;
+}
+#back-link-container{
+  float: right;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+
+@media (min-width: 300px) {
+  .col-forms-width{
+    width: 100%;
+  }
+  #btn-add-photo-wrapper{
+    float: left !important;
+    margin-left: 25%;
+    width: 50%;
+  }
+  form{
+    width: 320px;
+  }
+}
+
+@media (min-width: 520px) {
+  .col-forms-width{
+    width: 70%;
+    margin-left: 15%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-header{
+    width: 70%;
+    margin-left: 15%;
+  }
+  .col-forms-width{
+    width: 60%;
+    margin-left: 20%;
+  }
+  form{
+    width: 360px;
+  }
+}
+
+@media (min-width: 970px) {
+  .col-header{
+    width: 60%;
+    margin-left: 20%;
+  }
+  .col-forms-width{
+    width: 60%;
+    margin-left: 20%;
+  }
+  form{
+    width: 360px;
+  }
+}
+
+@media (min-width: 1150px) {
+  .col-header {
+    width: 45%;
+    margin-left: 27.5%;
+  }
+  .col-forms-width{
+    width: 45%;
+    margin-left: 27.5%;
+  }
+  form{
+    width: 360px;
+  }
+}

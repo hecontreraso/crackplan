@@ -1,3 +1,285 @@
-// Place all the styles related to the profile controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$shadow: 0 0px 3px gray;
+$standard-blue: #1F9BD0;
+
+.col-50{
+  width: 49%;
+  display: inline-block;
+}
+
+.card-width{
+  box-shadow: $shadow;
+}
+
+.bio-container{
+  display: inline-block;
+  margin-top: 10px;
+  h4{
+    font-size: 22px;
+    font-weight: 300;
+    color: gray;
+  }
+  p{
+    color: lightgray;
+  }
+}
+
+.profile-wrapper{
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 0px 3px gray;
+  #profile{
+    padding: 15px;
+    margin-bottom: 10px;
+    position: relative;
+    text-align: center;
+    #edit-profile{
+      position: absolute;
+      right: 13px;
+      top: 8px;
+      img{ width: 25px; }
+    }
+    .profile-header{
+      #img-profile{
+        height: 90px;
+        border-radius: 50%;
+      }
+      .profile-image-wrapper{
+        width: 38%;
+        height: 90px;
+        float: left;
+      }
+      .profile-name-wrapper{
+        text-align: center;
+        height: 90px;
+        padding-top: 9%;
+        width: 100%;
+        #profile-name{
+          font-size: 18px;
+          font-weight: 300;
+        }
+      }
+    }
+
+    .middle-info{
+      font-size: 16px;
+      font-weight: 200;
+      margin-top: 20px;
+    
+    }
+    .middle-info-col {
+      float: left;
+      width: 33.33333%;
+      text-align: center;
+    }
+    #lock{
+      width: 55px;
+    }
+    .btn-follow{
+      width: 100%;
+      background-color: #1F9BC8;
+      color: white;
+      height: 43px;
+      font-size: 14px;
+      text-transform: uppercase;
+      padding: 10px;
+      &:active{
+        background-color: #fff;
+        color: white;
+      }
+      &:hover{
+        background-color: $standard-blue;
+        color: white;
+      }   
+    }
+  }
+}
+
+
+.event{
+  background-color: white;
+  margin: 0 10px;
+
+  .panel-body {
+    padding: 0px !important;
+    position: relative;
+    img{
+      width: 100%;
+    }
+    .creator-wrapper{
+      bottom: 13px;
+      left: 19px;
+      position: absolute;
+      height: 40px;
+      .img-creator{
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+      }
+      .image-wrapper{
+        position: absolute;  
+      }
+      .text-wrapper{
+        position: absolute;
+        left: 50px;
+        width: 210px;
+        color: white;
+        span{
+          font-style: italic;
+        }
+      }
+      .creator-name{
+        color: white;
+      }
+    }
+    .triangle{  
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 15px 15px 15px;
+      border-color: transparent transparent #ffffff transparent;
+      position: absolute;
+      bottom: -5px;
+      left: 30px;
+      z-index: 1;
+    }
+  }
+
+  .event-body{
+    padding: 10px;
+    padding-bottom: 20px;
+    p{
+      font-weight: 300;
+    }
+
+    .button-wrapper{
+      text-align: center;
+      .btn-join{
+        width: 120px;
+        height: 42px;
+        border-radius: 5px;
+        border: solid 3px #1F9BD0;
+        font-size: 18px;
+        color: #1F9BD0;
+        padding: 5px;
+
+        &:active{
+          background-color: #fff;
+          color: white;
+        }
+        &:hover{
+          background-color: $standard-blue;
+          color: white;
+        }    
+      }
+    }
+  }
+}
+
+@media (min-width: 300px) {
+  #profile{
+    width: 320px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin: auto;
+    #profile-name{
+      font-size: 16px;
+    }
+  }
+  .event{
+    border-radius: 5px;
+    .creator-name{
+      font-size: 19px
+    }
+    .img-event{
+      border-radius: 5px 5px 0px 0px;
+    }
+    .event-body{
+      p{
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+
+#columns {
+  -webkit-column-count: 3;
+  -webkit-column-gap: 10px;
+  -webkit-column-fill: auto;
+  -moz-column-count: 3;
+  -moz-column-gap: 10px;
+  -moz-column-fill: auto;
+  column-count: 3;
+  column-gap: 10px;
+  column-fill: auto;
+}
+
+.card-wrapper {
+  display: inline-block;
+  margin-bottom: 20px;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  column-break-inside: avoid;  
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+@media (min-width: 300px) { 
+  #columns {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
+
+@media (min-width: 500px) {
+  .col-header{
+    width: 400px;
+    margin: auto;
+  }
+  #profile{
+    width: 400px;
+  }
+  #columns {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+  .profile-image-wrapper{
+    width: 41% !important;
+    text-align: right;
+  }
+  .profile-name-wrapper{
+    width: 84%;
+  }
+}
+
+@media (min-width: 960px) {
+  .col-header{
+    width: 712px;
+    margin: auto;
+  }
+  #columns {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    margin-top: 50px;
+  }
+  .profile-image-wrapper{
+    width: 35% !important;
+    text-align: right;
+  }
+  .profile-name-wrapper{
+    width: 81%;
+  }
+}
+
+@media (min-width: 1300px) {
+  #columns {
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    column-count: 4;
+  }
+}

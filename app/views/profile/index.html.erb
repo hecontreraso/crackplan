@@ -1,99 +1,132 @@
-<section>
-  <div hidden id="is_current_user_profile"><%= current_user == @user %></div>
-  <div hidden id="user_id"><%= @user.id %></div>
+<div hidden id="is_current_user_profile"><%= current_user == @user %></div>
+<div hidden id="user_id"><%= @user.id %></div>
 
-  <% if current_user == @user %>
-    <%= link_to 'Edit profile', edit_user_registration_path %>
+<div class="profile-wrapper">
+  <section id="profile" class="">          
+
+    <% if current_user == @user %>
+      <a href="<%= edit_user_registration_path %>" id="edit-profile">
+        <img src="https://s3.amazonaws.com/crankplan-p/pinon.png" alt="edit profile">
+      </a>
+    <% end %>
+
+    <div class="profile-header">
+      <div class="profile-image-wrapper">
+        <%= image_tag(@user.image.medium, id: "img-profile") %>
+      </div>
+      <div class="profile-name-wrapper">
+        <span id="profile-name"><%= @user.full_name %></span>
+      </div>
+    </div>
+
+    <div class="middle-info">
+      <span class="middle-info middle-info-col"><strong><%= @user.events.count %></strong> Events</span>
+      <span class="middle-info middle-info-col"><strong><%= @user.followers.count-1 %></strong> Followers</span>
+      <span class="middle-info middle-info-col"><strong><%= @user.following.count-1 %></strong> Following</span>
+    </div>
+
+    <div class="bio-container">
+      <% unless @user.bio.nil? %>
+        <h4>Short bio:</h4>
+        <p><%= @user.bio %></p>
+      <% end %>
+
+      <% unless (current_user.nil? || current_user == @user)  %>
+        <span id="follow" class="btn btn-follow"><%= @follow_or_unfollow %></span>
+      <% end %>
+    </div>
+
+  </section>
+</div>
+
+<section id="columns">
+
+  <% @user.events.each do |event| %>
+    <div class="card-wrapper">
+      <article id="<%= event.id %>" class="event card-width">
+        <div class="panel-body">
+          <%= image_tag(event.image.small, class: "img-event")%>
+          <div class="creator-wrapper">
+            <div class="image-wrapper">
+              <%= image_tag(event.creator.image.small, class: "img-creator")%>
+            </div>
+            <div class="text-wrapper">
+              <span>Event by:</span><br>
+              <%= link_to event.creator.full_name, profile_path(event.creator), class: "creator-name" %>
+            </div>
+          </div>
+          <div class="triangle"></div>
+        </div>
+
+        <div class="event-body">
+          <% unless 
+            (current_user && current_user.following?(event.creator).nil? && event.creator.privacy == "private") 
+          %>
+            <p><%= event.details %></p>
+          <% end %>
+
+
+          <hr>
+
+
+          <% assistants = event.get_visible_assistants(current_user)%>
+          <% limit_assistants_shown = 5 %>
+          <% if assistants.count == 0 %>
+          <% elsif assistants.count == 1 %>
+            <%= link_to assistants.first.full_name, profile_path(assistants.first), class: "assistant-name" %> is going
+
+          <% elsif assistants.count <= limit_assistants_shown %>
+            <% all_but_last_two = assistants[0, (assistants.count-2)] %>
+            <% last_two = assistants[assistants.count-2, 2] %>
+
+            <% all_but_last_two.each { |user| %> 
+              <%= link_to user.full_name, profile_path(user), class: "assistant-name" %>,
+            <% } %>
+            <%= link_to last_two.first.full_name, profile_path(last_two.first), class: "assistant-name" %> and
+            <%= link_to last_two.last.full_name, profile_path(last_two.last), class: "assistant-name" %> are going
+
+          <% else %>
+            <% showed_assistants = assistants[0, limit_assistants_shown] %>
+            <% hidden_assistants = assistants[limit_assistants_shown, assistants.count - limit_assistants_shown] %>
+            <% showed_assistants.each { |user| %> 
+              <%= link_to user.full_name, profile_path(user), class: "assistant-name" %>,
+            <% } %> and
+            <% tooltip = "" %> 
+            <% hidden_assistants.each { |user| %> 
+              <% tooltip += "#{user.full_name}<br>" %>
+            <% } %>
+
+            <span class="assistant-name" data-toggle="tooltip" data-placement="top" title="<%= tooltip%>">
+              <%= assistants.count - limit_assistants_shown %> more
+            </span> are going
+          <% end %>
+
+
+          <br>
+
+
+          <% unless 
+            (current_user && current_user.following?(event.creator).nil? && event.creator.privacy == "private")
+          %>
+            <%= event.where %>
+          <% end %>
+          <br>
+          <%= event.friendly_date %> <%= event.friendly_hour %>
+          <br>
+          <br>
+        
+          <div class="button-wrapper">
+            <% if current_user.nil? || event.creator == current_user %>
+            <% elsif event.creator.privacy == "public" || (current_user && current_user.following?(event.creator)) %>
+              <span class="join_event btn btn-default btn-join"><%= current_user.get_going_label(event) if current_user %></span>
+            <% elsif event.creator.privacy == "private" && (current_user && current_user.following?(event.creator)) %>
+              To go to this event you must follow <%= link_to event.creator.full_name, profile_path(rendered_event.creator) %>
+            <% end %>                    
+          </div>
+        
+        </div>
+
+      </article>
+    </div>
   <% end %>
-
-  <%= image_tag(@user.image.small)%><br>
-  <%= @user.full_name %>
-  <br>
-  <%= @user.events.count %> Events
-  <br>
-  <%= @user.followers.count-1 %> Followers
-  <br>
-  <%= @user.following.count-1 %> Following
-  <br>
-  Short bio:
-  <br>
-  <%= @user.bio %>
-  <br>
-
-  <% if current_user.nil? %>
-    <p>You must be logged in to see <%= @user.full_name %>'s profile</p>
-  <% elsif current_user.following?(@user).nil? && @user.privacy == "private" %>
-    <p>This account is private</p>
-    <p>Request to follow <%= @user.full_name %> to see his events</p>
-  <% end%>
-
-  <% unless (current_user.nil? || current_user == @user)  %>
-    <span id="follow"><%= @follow_or_unfollow %></span>
-  <% end %>
-  <br>
-  <br>
-  <br>
-  <br>
-</section>
-
-
-<% if (@user.privacy == "public" || (current_user && current_user.following?(@user)) ) %>
-
-  <% @events.each do |event| %>
-    <article id="<%= event.id %>" class="event">
-      <%= image_tag(event.image.small)%>
-      <br>
-      <%= image_tag(event.creator.image.small)%>
-      <br>
-      Event by
-      <%= link_to event.creator.full_name, profile_path(event.creator) %>
-      <br>
-      <% unless 
-        (current_user && current_user.following?(event.creator).nil? && event.creator.privacy == "private") 
-      %>
-        <%= event.details %>
-      <% end %>
-      <br>
-
-
-
-
-      <% if current_user == event.creator %>
-        <%= event.users.collect { |user| user.full_name } %>
-      <% else %>
-        <%= event.users.collect { |user| 
-          # TODO: ORDER THIS
-          user.full_name if (user.privacy == "public" || (current_user &&current_user.following?(user)) )
-        } %>
-      <% end %>
-      
-
-
-
-      <br>
-      <% unless 
-        (current_user && current_user.following?(event.creator).nil? && event.creator.privacy == "private")
-      %>
-        <%= event.where %>
-      <% end %>
-      <br>
-      <%= event.friendly_date %>
-      <br>
-      <%= event.friendly_hour %>
-      <br>
-
-      <% if event.creator == current_user %>
-      <% elsif event.creator.privacy == "public" || (current_user && current_user.following?(event.creator)) %>
-        <span class="join_event"><%= current_user.get_going_label(event) if current_user %></span>
-      <% elsif event.creator.privacy == "private" && (current_user && current_user.following?(event.creator)) %>
-        To go to this event you must follow <%= link_to event.creator.full_name, profile_path(rendered_event.creator) %>
-      <% end %>
-
-      <br>
-      <br>
-    </article>
-  <% end %>
-
-<% end %>
-
-
+</section>>

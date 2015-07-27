@@ -30,8 +30,16 @@ class Event < ActiveRecord::Base
   after_save :assist_to_event
 
   # Get all the assistants of an event that an specific user can see
-  def get_visible_followers(target_user)
+  def get_visible_assistants(target_user)
+    
     assistants = []
+    if target_user.nil? && creator.privacy == "public"
+      users.collect { |user| 
+        assistants << user if user.privacy == "public"
+      }
+      return assistants
+    end
+
     # If I'm the creator, I can see all assistants
     if target_user == creator
       assistants = users

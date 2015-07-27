@@ -1,48 +1,83 @@
-// Place all the styles related to the events controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 $form-fields-heigth: 50px;
 $standard-blue: #1F9BD0;
 
-form{
-  padding-top: 20px;
-  padding-bottom: 20px;
-  .form-control {
-    height: $form-fields-heigth;
-    margin-top: 5px;
-  }
-  .input-small{
-    width: 95%;
-  }
-  #btn-add-photo-wrapper {
-    color: #A6A6A6;
-    padding: 0;
-    display: flex;
-    span{
-      position: absolute;
-      width: 100%;
-      margin-top: 12px;
+.request{
+  padding: 15px;
+  .request-username-wrapper{  
+    .img-request-avatar{
+      border-radius: 50px;
+      width: 75px;
+      height: 75px;    
     }
-    input[type="file"] {
-      width: 100%;
-      height: $form-fields-heigth;
-      opacity: 0;
+    .username-request{
+      float: right;
+      margin-left: 10px;
+      .button-request{
+        width: 80px;
+      }
+    }
+    .name-request{
+      color: $standard-blue;
+      font-weight: 300;
+    }
+    .wants-to{
+      font-weight: 400;
+      color: gray;
+    }
+    .request-buttons{
+      // margin-top: 5px;
     }
   }
-  #btn-add-event{
-    width: 90px;
-    color: $standard-blue;
-    height: $form-fields-heigth;
-    border-radius: 7px;
-    font-size: 18px;
-  }
-
 }
+
+.form-container{
+  background-color: white;
+  box-shadow: 0 0px 3px lightgray;
+  margin-top: 10px;
+  form{
+    .form-control {
+      height: $form-fields-heigth;
+      margin-top: 5px;
+    }
+    .input-small{
+      width: 95%;
+    }
+    #btn-add-photo-wrapper {
+      color: #A6A6A6;
+      padding: 0;
+      display: flex;
+      text-align: center;
+      position: relative;
+      span{
+        width: 100%;
+        margin-top: 14px;
+        position: absolute;
+      }
+      input[type="file"] {
+        width: 100%;
+        height: $form-fields-heigth;
+        opacity: 0;
+        position: relative;
+      }
+    }
+    #btn-add-event{
+      width: 90px;
+      color: $standard-blue;
+      height: $form-fields-heigth;
+      border-radius: 7px;
+      font-size: 18px;
+      margin-top: 15px;
+    }
+  }  
+}
+
 
 article{
   padding-bottom: 15px;
-  .panel-heading {
+  background-color: white;
+  box-shadow: 0 0px 3px lightgray;
+
+  .event-heading {
     min-height: 68px;
     background-color: white !important;
     padding: 15px;
@@ -52,13 +87,10 @@ article{
       border-radius: 50%;
       width: 40px;
       height: 40px;
+      margin-right: 10px;
     }
     .username {
       color: $standard-blue;
-      font-weight: 700;
-      max-width: 250px;
-      width: 100%;
-      padding-top: 10px;
     }
     .time{
       position: absolute;
@@ -73,6 +105,15 @@ article{
     img {
       width: 100%;
       max-height: 520px;
+    }
+  }
+  .event-bottom{
+    padding: 15px;
+    p{
+      font-size: 16px;
+    }
+    .event-from{
+      color: gray;
     }
   }
   .assistant-name {
@@ -103,6 +144,100 @@ article{
       background-color: $standard-blue;
       color: white;
     }    
+  } 
+}
+
+
+@media (min-width: 300px) {
+  .col-eventos{
+    width: 100%;
   }
-  
+  .form-container{
+    padding: 15px;
+  }
+  article{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .request-buttons{
+    margin-top: 10px;
+  }
+  .username-request{
+    width: 190px;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-header{
+    width: 70%;
+    margin-left: 15%;
+  }
+  .col-eventos{
+    width: 70%;
+    margin-left: 15%;
+  }
+  .username{
+    font-size: 18px;
+    font-weight: 300;
+  }
+  .event-bottom p {
+    font-size: 17px;
+  }
+  #logo-crackplan{
+    width: 147px;
+  }
+  .form-container{
+    padding: 15px;
+  }
+  article{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .username-request{
+    width: 80%;
+    margin-top: 13px;
+  }
+  .name-request{
+    font-size: 17px;  
+  }
+  .wants-to{
+    font-size: 12px;
+  }
+  .request-buttons{
+    display: inline;
+    float: right;
+    margin-top: -10px;
+    margin-right: 12px;
+  }
+}
+
+@media (min-width: 970px) {
+  .col-header {
+    width: 60%;
+    margin-left: 20%;
+  }
+  .col-eventos {
+    width: 60%;
+    margin-left: 20%;
+  }
+  .username-request{
+    width: 80%;
+  }
+}
+
+@media (min-width: 1150px) {
+  .col-header {
+    width: 45%;
+    margin-left: 27.5%;
+  }
+  .col-eventos {
+    width: 45%;
+    margin-left: 27.5%;
+  }
+  #logo-crackplan{
+    width: 182px !important;
+  }
+  .username-request{
+    width: 80%;
+  }
 }
