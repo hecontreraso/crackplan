@@ -14,7 +14,7 @@ class Assistant < ActiveRecord::Base
 	belongs_to :event
 
   after_create :notify_followers
-  after_destroy :destroy_notifications
+  before_destroy :destroy_notifications
 
   private
     def notify_followers

@@ -30,21 +30,8 @@ class EventsController < ApplicationController
       rendered_event.image = feed.event.image
       rendered_event.creator = feed.event.creator
       rendered_event.details = feed.event.details
-
-      rendered_event.assistants = []
-      # If I'm the creator, I can see all assistants
-      if current_user == feed.event.creator
-        rendered_event.assistants == feed.event.users
-      # If I'm following the creator or the creator has a public profile, I can see all assistants but private or following
-      elsif (current_user.following?(feed.event.creator) || feed.event.creator.privacy == "public")
-        feed.event.users.collect { |user| 
-          # TODO: ORDER THIS
-          rendered_event.assistants << user if (user.privacy == "public" || current_user.following?(user))
-        }
-      end
-
+      rendered_event.assistants = feed.event.get_visible_assistants(current_user)
       rendered_event.where = feed.event.where
-
       rendered_event.friendly_date = feed.event.friendly_date
       rendered_event.friendly_hour = feed.event.friendly_hour
       rendered_event.going_label = current_user.get_going_label(feed.event)

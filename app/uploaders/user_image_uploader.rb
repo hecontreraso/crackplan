@@ -23,7 +23,7 @@ class UserImageUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
     # 'profile_missing.png' #rails will look at 'app/assets/images/default_avatar.png'
-    'http://www.w3.org/Icons/caution.gif'
+    'https://s3.amazonaws.com/crankplan-p/500_360.png'
   end
 
   # Process files as they are uploaded:

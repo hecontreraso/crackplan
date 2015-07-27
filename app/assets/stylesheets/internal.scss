@@ -1,69 +1,107 @@
+$shadow: 0 0px 3px lightgray;
+$standard-blue: #1F9BD0;
+
+.col-30{
+  width: 33.3%;
+  float: left;
+}
+.col-50{
+  width: 33.3%;
+  float: left;
+}
+.col-100{
+  width: 100%;
+  float: left; 
+}
+
 body { 
 	padding-bottom: 70px; 
   background-color: #f8f8f8;
+  font-family: 'Roboto' !important;
 }
 
-nav{
+header{
   padding-top: 35px;
   padding-bottom: 7px;
   background-color: white !important;
   box-shadow: 0 0px 3px lightgray;
 
-  #logo-crackplan {
-    width: 65%;  
-  }
-  li{
-    .profile-avatar{
-      border-radius: 50px;
-      width: 40px;
-      height: 40px;
-    }    
-    a{
-      padding: 0 0 0 10px !important;
+  .col-header{
+    height: 45px;
+    .col-logo{
+      width: 49%;  
+      display: inline-block;
+      float: left;
+    }
+    .col-username{
+      width: 49%;
+      display: inline-block;  
+      float: right;
+      #username-wrapper{
+        float: right;
+        margin-left: 10px;
+        .username {
+          color: $standard-blue;
+          width: 100%;
+          &:hover {
+            color: $standard-blue;
+          }
+        }        
+      }
+      .profile-avatar{
+        border-radius: 50px;
+        width: 40px;
+        height: 40px;
+      }
+      .logout{
+        font-weight: 300;
+      }
     }
   }
-
 }
 
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
-  position: relative;
-  min-height: 1px;
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
-
-.btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
-  color: #333;
-  background-color: #e6e6e6;
-  border-color: transparent!important;
-}
-
-
-// TODO usar estas clases para acomodar el nombre en el navbar
-.username {
-  color: #1F9BD0!important;
-  font-weight: 700!important;
-  max-width: 150px;
-  width: 100%;
-}
-.navbar-default .navbar-nav>li>a {
-  color: #008ECB;
-  font-weight: 100;
-  padding: 7px 0px 0px 9px;
-}
-.username:hover {
-  color: #1F9BD0!important;
-  font-weight: 700!important;
-}
-
-
-
-@media screen and (max-width: 720px) {
-   .contenedor {
-      width: 100%;
+@media (min-width: 300px) {
+  header{
+    padding-top: 18px;
+  }
+  #logo-crackplan{
+    width: 110px;
+  }
+  .col-header{
+    margin-left: 10px;
+  }
+  .col-username{
+    text-align: right;
+    padding-right: 10px;
+    .username{
+      margin-right: -4px;
     }
-    .panel{
-      padding-left: 10px;
-      padding-right: 10px;
+    .logout{
+      font-size: 13px;
     }
+  }
+  .profile-avatar{
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  #logo-crackplan{
+    width: 160px !important;
+  }
+  .col-username{
+    .logout{
+      float: left;
+    }
+  }
+  .profile-avatar{
+    display: inline;
+  }
+
+}
+
+@media (min-width: 1150px) {
+  #logo-crackplan{
+    width: 182px !important;
+  }
 }

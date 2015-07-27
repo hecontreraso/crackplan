@@ -1,8 +1,16 @@
-<article id="<%= requesting_user.id %>">
-  <%= image_tag(requesting_user.image.small) %>
-  <br>
-  <%= requesting_user.full_name %> wants to follow you
-  <br>
-  <span class="accept">Accept</span>
-  <span class="decline">Decline</span>
+<article class="event-container request" value="<%= requesting_user.id %>">
+
+	<div class="request-username-wrapper">	
+		<%= image_tag(requesting_user.image.medium, class: "img-request-avatar") %>
+	  <div class="username-request">
+		  <span class="name-request"><%= requesting_user.full_name %></span><br>
+	  	<span class="wants-to">Wants to follow you</span>
+		  <div class="request-buttons">	
+			  <img src="https://s3.amazonaws.com/crankplan-p/confirm.png" class="button-request accept-request">
+			  <img src="https://s3.amazonaws.com/crankplan-p/delete.png" class="button-request decline-request">
+		  </div>
+	  </div>
+	</div>
+
+
 </article>

@@ -8,30 +8,30 @@ ready = function() {
 	//Used to join an event
 	$(".join_event").click(function(){
 		var join_button = $(event.target);
-		var id = join_button.closest("article").attr("id");
-    
+		var id = join_button.closest("article").attr("id");  
+
     $.post("/events/" + id + "/toggle_assistance", function(data, status){
     	join_button.text(data.returned_state);    
     }, "json");
 	});
 
 	//Used to accept a following request
-	$(".accept").click(function(){
+	$(".accept-request").click(function(){
 		var accept_button = $(event.target);
-		var id = accept_button.closest("article").attr("id");
     
+		var id = accept_button.closest("article").attr("value");
     $.post("/profile/" + id + "/accept_request", function(data, status){
-			$("#" + id).remove();    
+			accept_button.closest("article").remove();    
     }, "json");
 	});
 
 	//Used to decline a following request
-	$(".decline").click(function(){
+	$(".decline-request").click(function(){
 		var decline_button = $(event.target);
-		var id = decline_button.closest("article").attr("id");
+		var id = decline_button.closest("article").attr("value");
     
     $.post("/profile/" + id + "/decline_request", function(data, status){
-			$("#" + id).remove();    
+			decline_button.closest("article").remove();    
     }, "json");
 	});
 

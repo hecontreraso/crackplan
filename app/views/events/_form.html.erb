@@ -1,44 +1,34 @@
-<div class="text-center">
-  <div class="panel panel-default row">
-    <%= form_for(@event, html: {class: "col-md-offset-3 col-md-6"}) do |f| %>
-      <% if @event.errors.any? %>
-        <%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:
-        <% @event.errors.full_messages.each do |message| %>
-          <%= message %>
-        <% end %>
+<div class="form-container text-center">
+  <%= form_for(@event) do |f| %>
+    <% if @event.errors.any? %>
+      <%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:
+      <% @event.errors.full_messages.each do |message| %>
+        <%= message %>
       <% end %>
-      <div class="form-group">
-        <div class="row">
-          <%= f.text_area :details, placeholder: 'Plan details...', class: "form-control" %>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="row">
-          <%= f.text_field :where, class: "form-control", placeholder: 'Where? (Add a place)' %>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-4">
-            <%= f.date_field(:date, min: Date.today, class: "form-control pull-left input-small") %>
-          </div>
-          <div class="col-md-4">
-            <%= f.text_field :time, id: "event_time", class: "form-control", placeholder: 'Now add a time!' %>
-          </div>
-          <div class="col-md-4">
-            <div id="btn-add-photo-wrapper" class="btn btn-default form-control pull-right input-small">
-              <span>Add a event photo</span>  
-              <%= f.file_field :image %>
-            </div>
-          </div>
-        </div>     
-      </div>
-      <div class="form-group">
-        <div class="row">
-          <%= token_tag form_authenticity_token %>
-          <%= f.submit "Do it!", id: "btn-add-event", class: "btn btn-default" %>
-        </div>
-      </div>
     <% end %>
-  </div>
+    <div class="form-group">
+      <%= f.text_area :details, placeholder: 'Plan details...', class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :where, class: "form-control", placeholder: 'Where? (Add a place)' %>
+    </div>
+    <div class="form-group">
+      <div class="col-30">
+        <%= f.date_field(:date, min: Date.today, class: "form-control pull-left input-small") %>
+      </div>
+      <div class="col-30">
+        <%= f.text_field :time, id: "event_time", class: "form-control", placeholder: 'Time!' %>
+      </div>
+      <div class="col-30">
+        <div id="btn-add-photo-wrapper" class="btn btn-default form-control pull-right input-small">
+          <span>Add photo</span>  
+          <%= f.file_field :image %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= token_tag form_authenticity_token %>
+      <%= f.submit "Do it!", id: "btn-add-event", class: "btn btn-default" %>
+    </div>
+  <% end %>
 </div> 

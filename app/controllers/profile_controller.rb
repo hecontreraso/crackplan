@@ -9,11 +9,15 @@ class ProfileController < ApplicationController
 	def index
 		@user = set_user
 
-		if user_signed_in?
+		if @user.privacy == "private" && user_signed_in? == false
+			render "forbidden_profile"
+		elsif @user.privacy == "private" && user_signed_in? && current_user.following?(@user).nil?
 			@follow_or_unfollow = current_user.get_relationship_label(@user)
+			render "forbidden_profile"
+		else
+			@follow_or_unfollow = current_user.get_relationship_label(@user) if user_signed_in?
+			render "index"
 		end
-
-		@events = @user.events
 	end
 
 	def toggle_follow
