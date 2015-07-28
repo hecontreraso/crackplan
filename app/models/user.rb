@@ -56,9 +56,6 @@ class User < ActiveRecord::Base
   validates :gender, presence: true, inclusion: [ "Male", "Female" ]
 	validates :privacy, presence: true, inclusion: [ "private", "public" ]
 
-  # A user follows himself
-  after_create :follow_himself
-
   #TODO FIX THIS ACCESOR AND MAKE ACTIVERECORD WORK
   def followers
     follower_ids = []
@@ -208,10 +205,5 @@ class User < ActiveRecord::Base
     end
 
   end
-
-  private
-    def follow_himself
-      Follow.create(follower_id: id, followed_id: id, status: "following")
-    end
 
 end
