@@ -67,9 +67,12 @@ $standard-blue: #1F9BD0;
     
     }
     .middle-info-col {
-      float: left;
+      float: none;
       width: 33.33333%;
       text-align: center;
+    }
+    .no-left{
+
     }
     #lock{
       width: 55px;
