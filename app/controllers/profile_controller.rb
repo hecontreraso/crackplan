@@ -11,6 +11,8 @@ class ProfileController < ApplicationController
 
 		if @user.privacy == "private" && user_signed_in? == false
 			render "forbidden_profile"
+		elsif user_signed_in? && current_user == @user
+			render "index"
 		elsif @user.privacy == "private" && user_signed_in? && current_user.following?(@user).nil?
 			@follow_or_unfollow = current_user.get_relationship_label(@user)
 			render "forbidden_profile"

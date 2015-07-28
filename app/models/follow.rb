@@ -15,18 +15,31 @@ class Follow < ActiveRecord::Base
 
   validates :status, presence: true, inclusion: [ "requested", "following", "blocked" ]
 
-  after_create :add_future_events_to_feed
-  before_destroy :destroy_notifications
+  after_save :add_future_events_to_feed
+  before_destroy :delete_feeds, :delete_assistances
 
-	private
+  private
     def add_future_events_to_feed
-    	events = User.find(followed_id).future_events
-    	events.each do |event|
-	      Feed.create(user_id: follower.id, event_id: event.id, feed_creator_id: followed.id, created_at: event.created_at)    		
-    	end
+      if status == "following"
+        events = User.find(followed_id).future_events
+        events.each do |event|
+          Feed.create(user_id: follower.id, event_id: event.id, feed_creator_id: followed.id, created_at: event.created_at)       
+        end
+      end
     end
 
-    def destroy_notifications
-      Feed.where(user_id: follower.id, feed_creator_id: followed.id).delete_all
+    def delete_feeds
+        Feed.where(user_id: follower.id, feed_creator_id: followed.id).delete_all
+    end
+
+    def delete_assistances
+      if followed.privacy == "private"
+        user = User.find(follower.id)
+        events = user.events.where(creator_id: followed.id)
+        events.each do |event|
+          logger.debug "#{follower.id}, #{event.id}"
+          Assistant.find_by(user_id: follower.id, event_id: event.id).delete
+        end
+      end
     end
 end
