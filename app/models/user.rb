@@ -68,7 +68,6 @@ class User < ActiveRecord::Base
     User.where(id: follower_ids)
   end
 
-
   def follow_requests
     request_ids = []
     Follow.where(followed_id: id, status: :requested).each do |follow|
@@ -87,6 +86,15 @@ class User < ActiveRecord::Base
     relationship.nil? ? "Join" : "Going"
   end
 
+  def future_events
+    future_ev = []
+    pre_future_events = events.where("date >= ?", Date.today)
+    pre_future_events.each do |event| 
+      future_ev << event if ( (event.date == Date.today && event.time > Time.now) || event.date > Date.today )        
+    end
+    return future_ev
+  end
+
   def get_relationship_label(other_user)
     relationship = Follow.find_by(follower_id: id, followed_id: other_user.id)
     if relationship.nil?
@@ -98,11 +106,9 @@ class User < ActiveRecord::Base
 
   # Request to join or quit from an event
   def toggle_assistance(event, current_user)
-
     unless self == current_user
       return "Not permitted"
     end
-
     if is_going_to?(event)
       Assistant.find_by(event_id: event.id, user_id: id).destroy
       return "Join"

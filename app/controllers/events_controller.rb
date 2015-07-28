@@ -17,8 +17,8 @@ class EventsController < ApplicationController
   def index
     @event = Event.new
 
-    feeds = current_user.feeds.sort.reverse
-    
+    feeds = current_user.feeds.sort_by(&:created_at).reverse 
+      
     @rendered_events = []
 
     feeds.collect do |feed|
