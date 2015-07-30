@@ -2,8 +2,7 @@
 // All this logic will automatically be available in application.js.
 var ready;
 ready = function() {
-
-	$('#page-events #event_time').timepicker({ 'minTime': '5:00am', 'maxTime': '11:00pm' });
+	datepickr('#event_date', { minDate: new Date() });
 
 	//Used to join an event
 	$("#page-events .join_event").click(function(event){

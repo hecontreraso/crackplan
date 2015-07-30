@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
       <div class="col-30">
-        <%= f.date_field(:date, min: Date.today, class: "form-control pull-left input-small") %>
+        <%= f.text_field(:date, class: "form-control pull-left input-small", placeholder: 'When?') %>
       </div>
       <div class="col-30">
         <%= f.text_field :time, id: "event_time", class: "form-control", placeholder: 'Time!' %>
