@@ -1,45 +1,46 @@
-<div hidden id="is_current_user_profile"><%= current_user == @user %></div>
-<div hidden id="user_id"><%= @user.id %></div>
+<div id="page-profile">
+  <div hidden id="is_current_user_profile"><%= current_user == @user %></div>
+  <div hidden id="user_id"><%= @user.id %></div>
 
-<div class="profile-wrapper">
-  <section id="profile" class="">          
+  <div class="profile-wrapper">
+    <section id="profile" class="">          
 
-    <% if current_user == @user %>
-      <a href="<%= edit_user_registration_path %>" id="edit-profile">
-        <img src="https://s3.amazonaws.com/crankplan-p/pinon.png" alt="edit profile">
-      </a>
-    <% end %>
-
-    <div class="profile-header">
-      <div class="profile-image-wrapper">
-        <%= image_tag(@user.image.medium, id: "img-profile") %>
-      </div>
-      <div class="profile-name-wrapper">
-        <span id="profile-name"><%= @user.full_name %></span>
-      </div>
-    </div>
-
-    <div class="middle-info">
-      <span class="middle-info middle-info-col"><strong><%= @user.events.count %></strong> Events</span>
-      <span class="middle-info middle-info-col"><strong><%= @user.followers.count %></strong> Followers</span>
-      <span class="middle-info middle-info-col"><strong><%= @user.following.count %></strong> Following</span>
-    </div>
-
-    <div class="bio-container">
-      <% unless @user.bio.nil? %>
-        <h4>Short bio:</h4>
-        <p><%= @user.bio %></p>
+      <% if current_user == @user %>
+        <a href="<%= edit_user_registration_path %>" id="edit-profile">
+          <img src="https://s3.amazonaws.com/crankplan-p/pinon.png" alt="edit profile">
+        </a>
       <% end %>
-      <img src="https://s3.amazonaws.com/crankplan-p/img-lock.png">
-      <br>
-      <br>
-      <span>Request to follow <%= @user.full_name %> to see his events</span>
-      <br>
-      <br>
-      <% unless (current_user.nil? || current_user == @user)  %>
-        <span id="follow" class="btn btn-follow"><%= @follow_or_unfollow %></span>
-      <% end %>
-    </div>
 
-  </section>
+      <div class="profile-header">
+        <div class="profile-image-wrapper">
+          <%= image_tag(@user.image.medium, id: "img-profile") %>
+        </div>
+        <div class="profile-name-wrapper">
+          <span id="profile-name"><%= @user.full_name %></span>
+        </div>
+      </div>
+
+      <div class="middle-info">
+        <span class="middle-info middle-info-col"><strong><%= @user.events.count %></strong> Events</span>
+        <span class="middle-info middle-info-col"><strong><%= @user.followers.count %></strong> Followers</span>
+        <span class="middle-info middle-info-col"><strong><%= @user.following.count %></strong> Following</span>
+      </div>
+
+      <div class="bio-container">
+        <% unless @user.bio.nil? %>
+          <h4>Short bio:</h4>
+          <p><%= @user.bio %></p>
+        <% end %>
+        <img src="https://s3.amazonaws.com/crankplan-p/img-lock.png">
+        <br>
+        <br>
+        <span>Request to follow <%= @user.full_name %> to see his events</span>
+        <br>
+        <br>
+        <% unless (current_user.nil? || current_user == @user)  %>
+          <span id="follow" class="btn btn-follow"><%= @follow_or_unfollow %></span>
+        <% end %>
+      </div>
+    </section>
+  </div>
 </div>

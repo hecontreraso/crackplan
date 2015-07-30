@@ -13,6 +13,6 @@
  *= require bootstrap/dist/css/bootstrap
  *= require jquery.timepicker
  *= require internal
- * require_tree .
+ *= require_tree .
  *= require_self
  */

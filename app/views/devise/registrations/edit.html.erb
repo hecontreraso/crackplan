@@ -1,95 +1,93 @@
-<div class="col-forms-width">
-
-  <div class="edit-form-wrapper">
-
-    <p id="notice"><%= notice %></p>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
-
-      <%= image_tag(current_user.image.medium, id: "form-image-profile") %>
-      <br>
-      <div id="btn-add-photo-wrapper" class="btn btn-default form-control">
-        <span>Add photo</span>  
-        <%= f.file_field :image %>
-        <%= token_tag form_authenticity_token %>
-      </div>
-
-      <div class="form-group">
-        <%= f.text_field :first_name, autofocus: true, placeholder: "First name", class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.text_field :last_name, placeholder: "Last name", class: "form-control"  %>
-      </div>
-
-      <div class="form-group">
-        <%= f.text_area :bio, placeholder: "Short bio about you", class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.date_select :birthdate, {start_year: Date.current().year, end_year: 1915}, class: "form-control col-30" %>
-      </div>
-      <br>
-      <br>
-      <br>
-      <%= label :gender, 'Male' %>
-      <%= f.radio_button :gender, 'Male' %> 
-      <%= label :gender, 'Female' %>
-      <%= f.radio_button :gender, 'Female' %>
-
-      <div class="form-group">
-        <%= f.email_field :email, autofocus: true, placeholder: "E-mail", class: "form-control" %>
-      </div>
-
-      <%= label :privacy, 'Public' %>
-      <%= f.radio_button :privacy, 'public' %> 
-      <%= label :privacy, 'Private' %>
-      <%= f.radio_button :privacy, 'private' %>
-
-      <div class="form-group">
-        <%= f.password_field :current_password, placeholder: "Password", autocomplete: "off", class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "Update profile", class: "btn btn-default btn-submit-blue" %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="edit-form-wrapper">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
+<div id="page-edit-profile">
+  
+  <div class="col-forms-width">
+    <div class="edit-form-wrapper">
       <p id="notice"><%= notice %></p>
-      
-      <p>Change your password</p>
-      <div class="form-group">
-        <%= f.password_field :current_password, placeholder: "Current password", autocomplete: "off", class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <% if @validatable %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
-        <%= f.password_field :password, placeholder: "New password", autocomplete: "off", class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.password_field :password_confirmation, placeholder: "Verify password", autocomplete: "off", class: "form-control" %>
-      </div>
-      <div class="actions">
-        <%= f.submit "Update profile", class: "btn btn-default btn-submit-blue" %>
-      </div>
-    <% end %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+
+        <%= image_tag(current_user.image.medium, id: "form-image-profile") %>
+        <br>
+        <div id="btn-add-photo-wrapper" class="btn btn-default form-control">
+          <span>Add photo</span>  
+          <%= f.file_field :image %>
+          <%= token_tag form_authenticity_token %>
+        </div>
+
+        <div class="form-group">
+          <%= f.text_field :first_name, autofocus: true, placeholder: "First name", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.text_field :last_name, placeholder: "Last name", class: "form-control"  %>
+        </div>
+
+        <div class="form-group">
+          <%= f.text_area :bio, placeholder: "Short bio about you", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.date_select :birthdate, {start_year: Date.current().year, end_year: 1915}, class: "form-control col-30" %>
+        </div>
+        <br>
+        <br>
+        <br>
+        <%= label :gender, 'Male' %>
+        <%= f.radio_button :gender, 'Male' %> 
+        <%= label :gender, 'Female' %>
+        <%= f.radio_button :gender, 'Female' %>
+
+        <div class="form-group">
+          <%= f.email_field :email, autofocus: true, placeholder: "E-mail", class: "form-control" %>
+        </div>
+
+        <%= label :privacy, 'Public' %>
+        <%= f.radio_button :privacy, 'public' %> 
+        <%= label :privacy, 'Private' %>
+        <%= f.radio_button :privacy, 'private' %>
+
+        <div class="form-group">
+          <%= f.password_field :current_password, placeholder: "Password", autocomplete: "off", class: "form-control" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Update profile", class: "btn btn-default btn-submit-blue" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="edit-form-wrapper">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+        <p id="notice"><%= notice %></p>
+        
+        <p>Change your password</p>
+        <div class="form-group">
+          <%= f.password_field :current_password, placeholder: "Current password", autocomplete: "off", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <% if @validatable %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, placeholder: "New password", autocomplete: "off", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.password_field :password_confirmation, placeholder: "Verify password", autocomplete: "off", class: "form-control" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Update profile", class: "btn btn-default btn-submit-blue" %>
+        </div>
+      <% end %>
+    </div>
+     
+    <br>
+    <br>
+
+    <div id="cancel-account-container">
+      <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+    </div>
+    <div id="back-link-container">
+      <%= link_to "Back to profile", profile_path(resource) %>
+    </div>
+
   </div>
-   
-  <br>
-  <br>
-
-  <div id="cancel-account-container">
-    <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
-  </div>
-  <div id="back-link-container">
-    <%= link_to "Back to profile", profile_path(resource) %>
-  </div>
-
-
-
-
 </div>

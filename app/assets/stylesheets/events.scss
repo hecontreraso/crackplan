@@ -1,240 +1,246 @@
 $form-fields-heigth: 50px;
 $standard-blue: #1F9BD0;
 
-.request{
-  padding: 15px;
-  .request-username-wrapper{  
-    .img-request-avatar{
-      border-radius: 50px;
-      width: 75px;
-      height: 75px;    
-    }
-    .username-request{
-      float: right;
-      margin-left: 10px;
-      .button-request{
-        width: 80px;
+#page-events{
+  .request{
+    padding: 15px;
+    .request-username-wrapper{  
+      .img-request-avatar{
+        border-radius: 50px;
+        width: 75px;
+        height: 75px;    
       }
-    }
-    .name-request{
-      color: $standard-blue;
-      font-weight: 300;
-    }
-    .wants-to{
-      font-weight: 400;
-      color: gray;
+      .username-request{
+        float: right;
+        margin-left: 10px;
+        .button-request{
+          width: 80px;
+        }
+      }
+      .name-request{
+        color: $standard-blue;
+        font-weight: 300;
+      }
+      .wants-to{
+        font-weight: 400;
+        color: gray;
+      }
     }
   }
-}
-
-.form-container{
-  background-color: white;
-  box-shadow: 0 0px 3px lightgray;
-  margin-top: 10px;
-  form{
-    .form-control {
-      height: $form-fields-heigth;
-      margin-top: 5px;
-    }
-    .input-small{
-      width: 95%;
-    }
-    #btn-add-photo-wrapper {
-      color: #A6A6A6;
-      padding: 0;
-      display: flex;
-      text-align: center;
-      position: relative;
-      span{
-        width: 100%;
-        margin-top: 14px;
-        position: absolute;
-      }
-      input[type="file"] {
-        width: 100%;
+  .form-container{
+    background-color: white;
+    box-shadow: 0 0px 3px lightgray;
+    margin-top: 10px;
+    form{
+      .form-control {
         height: $form-fields-heigth;
-        opacity: 0;
+        margin-top: 5px;
+      }
+      .input-small{
+        width: 95%;
+      }
+      #btn-add-photo-wrapper {
+        color: #A6A6A6;
+        padding: 0;
+        display: flex;
+        text-align: center;
         position: relative;
+        span{
+          width: 100%;
+          margin-top: 14px;
+          position: absolute;
+        }
+        input[type="file"] {
+          width: 100%;
+          height: $form-fields-heigth;
+          opacity: 0;
+          position: relative;
+        }
+      }
+      #btn-add-event{
+        width: 90px;
+        color: $standard-blue;
+        height: $form-fields-heigth;
+        border-radius: 7px;
+        font-size: 18px;
+        margin-top: 15px;
+      }
+    }  
+  }
+  article{
+    padding-bottom: 15px;
+    background-color: white;
+    box-shadow: 0 0px 3px lightgray;
+
+    .event-heading {
+      min-height: 68px;
+      background-color: white !important;
+      padding: 15px;
+      position: relative;
+      .avatar-radius{
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+      }
+      .username {
+        color: $standard-blue;
+      }
+      .time{
+        position: absolute;
+        right: 49px;
+        top: 23px;
+        color: #707070;
+        font-size: 18px;
       }
     }
-    #btn-add-event{
-      width: 90px;
-      color: $standard-blue;
-      height: $form-fields-heigth;
-      border-radius: 7px;
-      font-size: 18px;
-      margin-top: 15px;
+    .panel-body {
+      padding: 0px;
+      img {
+        width: 100%;
+        max-height: 520px;
+      }
     }
-  }  
-}
-
-
-article{
-  padding-bottom: 15px;
-  background-color: white;
-  box-shadow: 0 0px 3px lightgray;
-
-  .event-heading {
-    min-height: 68px;
-    background-color: white !important;
-    padding: 15px;
-    position: relative;
-
-    .avatar-radius{
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      margin-right: 10px;
+    .event-bottom{
+      padding: 15px;
+      p{
+        font-size: 16px;
+      }
+      .event-from{
+        color: gray;
+      }
     }
-    .username {
-      color: $standard-blue;
-    }
-    .time{
-      position: absolute;
-      right: 49px;
-      top: 23px;
-      color: #707070;
-      font-size: 18px;
-    }
-  }
-  .panel-body {
-    padding: 0px;
-    img {
-      width: 100%;
-      max-height: 520px;
-    }
-  }
-  .event-bottom{
-    padding: 15px;
-    p{
-      font-size: 16px;
-    }
-    .event-from{
-      color: gray;
-    }
-  }
-  .assistant-name {
-    color: $standard-blue;
-    font-weight: 700;
-    max-width: 150px;
-    width: 100%;
-
-    &:hover {
+    .assistant-name {
       color: $standard-blue;
       font-weight: 700;
-    }
-  }
-  .btn-join{
-    width: 148px;
-    height: 56px;
-    border-radius: 7px;
-    border: solid 2px $standard-blue;
-    font-size: 22px;
-    color: $standard-blue;
-    padding: 9px;
+      max-width: 150px;
+      width: 100%;
 
-    &:active{
-      background-color: #fff;
-      color: white;
+      &:hover {
+        color: $standard-blue;
+        font-weight: 700;
+      }
     }
-    &:hover{
-      background-color: $standard-blue;
-      color: white;
-    }    
-  } 
+    .btn-join{
+      width: 148px;
+      height: 56px;
+      border-radius: 7px;
+      border: solid 2px $standard-blue;
+      font-size: 22px;
+      color: $standard-blue;
+      padding: 9px;
+
+      &:active{
+        background-color: #fff;
+        color: white;
+      }
+      &:hover{
+        background-color: $standard-blue;
+        color: white;
+      }    
+    } 
+  }
 }
 
 
 @media (min-width: 300px) {
-  .col-eventos{
-    width: 100%;
-  }
-  .form-container{
-    padding: 15px;
-  }
-  article{
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  .request-buttons{
-    margin-top: 10px;
-  }
-  .username-request{
-    width: 190px;
+  #page-events{
+    .col-eventos{
+      width: 100%;
+    }
+    .form-container{
+      padding: 15px;
+    }
+    article{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .request-buttons{
+      margin-top: 10px;
+    }
+    .username-request{
+      width: 190px;
+    }
   }
 }
 
 @media (min-width: 768px) {
-  .col-header{
-    width: 70%;
-    margin-left: 15%;
-  }
-  .col-eventos{
-    width: 70%;
-    margin-left: 15%;
-  }
-  .username{
-    font-size: 18px;
-    font-weight: 300;
-  }
-  .event-bottom p {
-    font-size: 17px;
-  }
-  #logo-crackplan{
-    width: 147px;
-  }
-  .form-container{
-    padding: 15px;
-  }
-  article{
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  .username-request{
-    width: 80%;
-    margin-top: 13px;
-  }
-  .name-request{
-    font-size: 17px;  
-  }
-  .wants-to{
-    font-size: 12px;
-  }
-  .request-buttons{
-    display: inline;
-    float: right;
-    margin-top: -10px;
-    margin-right: 12px;
+  #page-events{
+    .col-header{
+      width: 70%;
+      margin-left: 15%;
+    }
+    .col-eventos{
+      width: 70%;
+      margin-left: 15%;
+    }
+    .username{
+      font-size: 18px;
+      font-weight: 300;
+    }
+    .event-bottom p {
+      font-size: 17px;
+    }
+    #logo-crackplan{
+      width: 147px;
+    }
+    .form-container{
+      padding: 15px;
+    }
+    article{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .username-request{
+      width: 80%;
+      margin-top: 13px;
+    }
+    .name-request{
+      font-size: 17px;  
+    }
+    .wants-to{
+      font-size: 12px;
+    }
+    .request-buttons{
+      display: inline;
+      float: right;
+      margin-top: -10px;
+      margin-right: 12px;
+    }
   }
 }
 
 @media (min-width: 970px) {
-  .col-header {
-    width: 60%;
-    margin-left: 20%;
-  }
-  .col-eventos {
-    width: 60%;
-    margin-left: 20%;
-  }
-  .username-request{
-    width: 80%;
+  #page-events{
+    .col-header {
+      width: 60%;
+      margin-left: 20%;
+    }
+    .col-eventos {
+      width: 60%;
+      margin-left: 20%;
+    }
+    .username-request{
+      width: 80%;
+    }
   }
 }
 
 @media (min-width: 1150px) {
-  .col-header {
-    width: 45%;
-    margin-left: 27.5%;
-  }
-  .col-eventos {
-    width: 45%;
-    margin-left: 27.5%;
-  }
-  #logo-crackplan{
-    width: 182px !important;
-  }
-  .username-request{
-    width: 80%;
+  #page-events{
+    .col-header {
+      width: 45%;
+      margin-left: 27.5%;
+    }
+    .col-eventos {
+      width: 45%;
+      margin-left: 27.5%;
+    }
+    #logo-crackplan{
+      width: 182px !important;
+    }
+    .username-request{
+      width: 80%;
+    }
   }
 }
