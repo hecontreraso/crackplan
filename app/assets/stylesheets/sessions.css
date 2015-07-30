@@ -12,6 +12,7 @@
  *
  *= require bootstrap/dist/css/bootstrap
  *= require jquery.timepicker
+ *= require datepickr
  * require_tree .
  *= require_self
  */

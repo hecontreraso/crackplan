@@ -14,9 +14,9 @@
 //= require jquery_ujs
 //= require jquery.timepicker
 //= require bootstrap/dist/js/bootstrap
+//= require datepickr
 //= require turbolinks
 // require_tree .
 
 //= require events
 //= require profile
-
