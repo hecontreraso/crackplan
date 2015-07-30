@@ -3,7 +3,7 @@
 var ready;
 ready = function() {
 
-	$(".join_event").click(function(){
+	$(".join_event").click(function(event){
 
 		var join_button = $(event.target);
 		var id = join_button.closest("article").attr("id");
@@ -22,11 +22,11 @@ ready = function() {
     }, "json");
 	});
 
-	$("#follow").click(function(){
+	$("#page-profile #follow").click(function(){
 
 		var id = $("#user_id").text();
     $.post("/profile/" + id + "/toggle_follow", function(data, status){
-    	$("#follow").text(data.returned_state);
+    	$("#page-profile #follow").text(data.returned_state);
     }, "json");
 
 	});

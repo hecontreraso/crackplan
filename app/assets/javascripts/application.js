@@ -16,3 +16,7 @@
 //= require bootstrap/dist/js/bootstrap
 //= require turbolinks
 // require_tree .
+
+//= require events
+//= require profile
+

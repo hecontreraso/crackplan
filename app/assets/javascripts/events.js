@@ -3,10 +3,10 @@
 var ready;
 ready = function() {
 
-	$('#event_time').timepicker({ 'minTime': '5:00am', 'maxTime': '11:00pm' });
+	$('#page-events #event_time').timepicker({ 'minTime': '5:00am', 'maxTime': '11:00pm' });
 
 	//Used to join an event
-	$(".join_event").click(function(){
+	$("#page-events .join_event").click(function(event){
 		var join_button = $(event.target);
 		var id = join_button.closest("article").attr("id");  
 
@@ -16,9 +16,8 @@ ready = function() {
 	});
 
 	//Used to accept a following request
-	$(".accept-request").click(function(){
+	$("#page-events .accept-request").click(function(event){
 		var accept_button = $(event.target);
-    
 		var id = accept_button.closest("article").attr("value");
     $.post("/profile/" + id + "/accept_request", function(data, status){
 			accept_button.closest("article").remove();    
@@ -26,7 +25,8 @@ ready = function() {
 	});
 
 	//Used to decline a following request
-	$(".decline-request").click(function(){
+	$("#page-events .decline-request").click(function(event){
+		console.log("DECLINE REQUEST METHOD");
 		var decline_button = $(event.target);
 		var id = decline_button.closest("article").attr("value");
     
@@ -39,7 +39,6 @@ ready = function() {
 	$(function () {
 	  $('[data-toggle="tooltip"]').tooltip({ html: true })
 	});
-
 
 };
 

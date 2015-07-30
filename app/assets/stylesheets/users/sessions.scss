@@ -1,10 +1,7 @@
 $standard-blue: #1F9BD0;
 
-.col-content{
-  float: left;
-}
 
-body { 
+#page-landing { 
   background-image: url(https://s3.amazonaws.com/crankplan-p/bg.jpg);
   background-position: center center;
   background-repeat: no-repeat;
@@ -13,151 +10,142 @@ body {
   background-color: #464646;
   color: #ffffff;
   font-family: 'Roboto' !important;
-}
-
-.contenedor{
-
-  width: 85%;
-  margin: 0 auto; 
-
-  blockquote{
-    padding: 0 20px;
-    border-left: 8px solid $standard-blue;
+  .col-content{
+    float: left;
   }
+  .contenedor{
+    width: 85%;
+    margin: 0 auto; 
+    blockquote{
+      padding: 0 20px;
+      border-left: 8px solid $standard-blue;
+    }
+    #logo{
+      margin-bottom: 115px;
+      width: 250px
+    }
+    h1 {
+      font-size: 56px;
+      font-weight: 100;
+    }
+    form{
+      margin: auto;
+      input{
+        padding-left: 30px;
+      }
+      #input-email{
+        background: url("https://s3.amazonaws.com/crankplan-p/landing-assets/mail.png") no-repeat scroll 7px 7px;
+        background-size: 18px;
+      }
+      #input-password{
+        background: url("https://s3.amazonaws.com/crankplan-p/landing-assets/password.png") no-repeat scroll 7px 7px;
+        background-size: 18px;
+      }
+      .inplog{
+        color: #fff!important;
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid #7B7878;
+      }
+      .inplog-placeholder {  
+         color: #fff;  
+      }
+      .inplog:-webkit-input-placeholder { /* WebKit browsers */
+           color: #fff; 
+      }
+      .inplog:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+          color: #fff; 
+         opacity:  1;
+      }
+      .inplog:-moz-placeholder { /* Mozilla Firefox 19+ */
+          color: #fff; 
+         opacity:  1;
+      }
+      .inplog:-ms-input-placeholder { /* Internet Explorer 10+ */
+          color: #fff; 
+      }
 
-  #logo{
-    margin-bottom: 115px;
-    width: 250px
+      input[type=submit]{
+        background-color: $standard-blue;
+        border: 0;
+        color: white;
+        font-size: 12px;
+        width: 110px;
+        height: 39px;
+        text-align: center;
+        padding: 0;
+      }
+    }
   }
-
-  h1 {
-    font-size: 56px;
-    font-weight: 100;
-  }
-
-  form{
-    margin: auto;
-
-    input{
-      padding-left: 30px;
-    }
-
-    #input-email{
-      background: url("https://s3.amazonaws.com/crankplan-p/landing-assets/mail.png") no-repeat scroll 7px 7px;
-      background-size: 18px;
-    }
-
-    #input-password{
-      background: url("https://s3.amazonaws.com/crankplan-p/landing-assets/password.png") no-repeat scroll 7px 7px;
-      background-size: 18px;
-    }
-
-    .inplog{
-      color: #fff!important;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid #7B7878;
-    }
-    .inplog-placeholder {  
-       color: #fff;  
-    }
-    .inplog:-webkit-input-placeholder { /* WebKit browsers */
-         color: #fff; 
-    }
-    .inplog:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color: #fff; 
-       opacity:  1;
-    }
-    .inplog:-moz-placeholder { /* Mozilla Firefox 19+ */
-        color: #fff; 
-       opacity:  1;
-    }
-    .inplog:-ms-input-placeholder { /* Internet Explorer 10+ */
-        color: #fff; 
-    }
-
-    input[type=submit]{
-      background-color: $standard-blue;
-      border: 0;
-      color: white;
-      font-size: 12px;
-      width: 110px;
-      height: 39px;
-      text-align: center;
-      padding: 0;
-    }
-
-  }
-
 }
 
 @media (min-width: 300px) {
-  .col-content{
-    width: 100%;
-  }
-  body{
+  #page-landing{
     padding-top: 20px;
     padding-bottom: 40px;
-  }
-  .logo-position{
-    text-align: center;
-  }
-  #logo{
-    margin-bottom: 0 !important;
-  }
-  h1 {
-    font-size: 36px !important;
+    .col-content{
+      width: 100%;
+    }
+    .logo-position{
+      text-align: center;
+    }
+    #logo{
+      margin-bottom: 0 !important;
+    }
+    h1 {
+      font-size: 36px !important;
+    }
   }
 }
 
 @media (min-width: 768px) {
-  body{
+  #page-landing{
     padding-top: 203px;
-  }
-  h1{
-    font-size: 59px !important;
-  }
-  .col-content{
-    width: 441px;
-    margin-left: 25%;
-  }
-  form{
-    width: 324px; 
+    h1{
+      font-size: 59px !important;
+    }
+    .col-content{
+      width: 441px;
+      margin-left: 25%;
+    }
+    form{
+      width: 324px; 
+    }
   }
 }
 
 @media (min-width: 900px) {
-  h1{
-    font-size: 71px !important;
-  }
-  body{
+  #page-landing{
     padding-top: 88px;
-  }
-  .col-content{
-    margin-left: 25%;
-  }
-  form {
-    width: 395px;
-    margin: 0 !important;
+    h1{
+      font-size: 71px !important;
+    }
+    .col-content{
+      margin-left: 25%;
+    }
+    form {
+      width: 395px;
+      margin: 0 !important;
+    }
   }
 }
 
 @media (min-width: 1150px) {
-  body{
+  #page-landing{
     padding-top: 136px;
-  }
-  .logo-position{
-    text-align: left;
-  }
-  .col-content{
-    width: 50%;
-    margin-left: -13px;
-  }
-  h1{
-    font-size: 60px !important;
-    margin-top: 139px;
-  }
-  form{
-    float: right;
-    margin-top: 148px !important;
+    .logo-position{
+      text-align: left;
+    }
+    .col-content{
+      width: 50%;
+      margin-left: -13px;
+    }
+    h1{
+      font-size: 60px !important;
+      margin-top: 139px;
+    }
+    form{
+      float: right;
+      margin-top: 148px !important;
+    }
   }
 }

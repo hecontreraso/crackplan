@@ -11,7 +11,6 @@ class EventsController < ApplicationController
     render json: { returned_state: returned_state }
   end 
   
-
   # GET /events
   # GET /events.json
   def index
