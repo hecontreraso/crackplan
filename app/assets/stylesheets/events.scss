@@ -39,6 +39,10 @@ $standard-blue: #1F9BD0;
       .input-small{
         width: 95%;
       }
+      .datepickr-wrapper{
+        width: 95%;
+        float: left;
+      }
       #btn-add-photo-wrapper {
         color: #A6A6A6;
         padding: 0;
@@ -165,11 +169,11 @@ $standard-blue: #1F9BD0;
 }
 
 @media (min-width: 768px) {
+  .col-header{
+    width: 70% !important;
+    margin-left: 15% !important;
+  }
   #page-events{
-    .col-header{
-      width: 70%;
-      margin-left: 15%;
-    }
     .col-eventos{
       width: 70%;
       margin-left: 15%;
@@ -211,11 +215,11 @@ $standard-blue: #1F9BD0;
 }
 
 @media (min-width: 970px) {
+  .col-header {
+    width: 60% !important;
+    margin-left: 20% !important;
+  }
   #page-events{
-    .col-header {
-      width: 60%;
-      margin-left: 20%;
-    }
     .col-eventos {
       width: 60%;
       margin-left: 20%;
@@ -227,11 +231,11 @@ $standard-blue: #1F9BD0;
 }
 
 @media (min-width: 1150px) {
+  .col-header {
+    width: 45% !important;
+    margin-left: 27.5% !important ;
+  }
   #page-events{
-    .col-header {
-      width: 45%;
-      margin-left: 27.5%;
-    }
     .col-eventos {
       width: 45%;
       margin-left: 27.5%;
