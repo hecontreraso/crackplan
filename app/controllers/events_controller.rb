@@ -17,7 +17,7 @@ class EventsController < ApplicationController
     @event = Event.new
 
     feeds = current_user.feeds.sort_by(&:created_at).reverse 
-      
+    
     @rendered_events = []
 
     feeds.collect do |feed|
@@ -53,8 +53,6 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     event_params[:time] = event_params[:time].to_time
-
-    user_signed_in?
 
     @event = Event.new(event_params)
     @event.creator = current_user

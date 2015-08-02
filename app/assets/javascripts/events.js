@@ -3,7 +3,7 @@
 var ready;
 ready = function() {
 	datepickr('#event_date', { minDate: new Date() });
-
+	$('#event_time').timepicker({ 'minTime': '5:00am', 'maxTime': '11:00pm' });
 	//Used to join an event
 	$("#page-events .join_event").click(function(event){
 		var join_button = $(event.target);
@@ -28,7 +28,7 @@ ready = function() {
 		console.log("DECLINE REQUEST METHOD");
 		var decline_button = $(event.target);
 		var id = decline_button.closest("article").attr("value");
-    
+		    
     $.post("/profile/" + id + "/decline_request", function(data, status){
 			decline_button.closest("article").remove();    
     }, "json");

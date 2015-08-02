@@ -1,5 +1,6 @@
 <div class="form-container text-center">
   <%= form_for(@event) do |f| %>
+    
     <% if @event.errors.any? %>
       <%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:
       <% @event.errors.full_messages.each do |message| %>
@@ -23,11 +24,11 @@
         <div id="btn-add-photo-wrapper" class="btn btn-default form-control pull-right input-small">
           <span>Add photo</span>  
           <%= f.file_field :image %>
+          <%= token_tag form_authenticity_token %>
         </div>
       </div>
     </div>
     <div class="form-group">
-      <%= token_tag form_authenticity_token %>
       <%= f.submit "Do it!", id: "btn-add-event", class: "btn btn-default" %>
     </div>
   <% end %>
