@@ -33,8 +33,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def accept_follow_request
-		user = set_user
-    returned_state = current_user.accept_follow_request(user)
+    returned_state = current_user.accept_follow_request(set_user)
     render json: { returned_state: returned_state }
 	end
 
