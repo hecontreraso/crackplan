@@ -26,20 +26,24 @@
 class User < ActiveRecord::Base
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
-	devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+	devise :database_authenticatable, :registerable, :recoverable, 
+    :rememberable, :trackable, :validatable
 
   # A user can assist to many events
 	has_many :assistants 
 	has_many :events, through: :assistants
 
   # A user can create many events
-	has_many :created_events, class_name: "Event", foreign_key: "creator_id", inverse_of: :creator
+	has_many :created_events, class_name: "Event",
+    foreign_key: "creator_id", inverse_of: :creator
 
   # A user has feeds of his events
   has_many :feeds, inverse_of: :user
 
   # A user can follow another users
-  has_many :follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  has_many :follows, class_name: "Follow",
+    foreign_key: "follower_id", dependent: :destroy
+
   has_many :following, through: :follows, source: :followed
 
   # A user have followers
@@ -52,7 +56,13 @@ class User < ActiveRecord::Base
 
 	validates :first_name, presence: true, length: { maximum: 35 }
 	validates :last_name, presence: true, length: { maximum: 35 }
-	validates :birthdate, presence: true, timeliness: { type: :date, before: Date.today, before_message: "The birthdate is incorrect" }
+	validates :birthdate,
+    presence: true, 
+    timeliness: {
+      type: :date, 
+      before: Date.today,
+      before_message: "The birthdate is incorrect"
+    }
   validates :gender, presence: true, inclusion: [ "Male", "Female" ]
 	validates :privacy, presence: true, inclusion: [ "private", "public" ]
 
@@ -103,7 +113,7 @@ class User < ActiveRecord::Base
 
   # Request to join or quit from an event
   def toggle_assistance(event, current_user)
-    unless self == current_user
+    unless self.eql?(current_user)
       return "Not permitted"
     end
     if is_going_to?(event)
@@ -111,7 +121,7 @@ class User < ActiveRecord::Base
       return "Join"
     else
       event_creator = event.creator
-      if event_creator.privacy == "public"
+      if event_creator.privacy.eql?("public")
         Assistant.create(event_id: event.id, user_id: id)
         return "Going"
       else
@@ -129,7 +139,7 @@ class User < ActiveRecord::Base
   def toggle_follow(other_user)
     relationship = Follow.find_by(follower_id: id, followed_id: other_user.id)
     if relationship.nil?
-      if other_user.privacy == "public"
+      if other_user.privacy.eql?("public")
         Follow.create(follower_id: id, followed_id: other_user.id, status: :following)
         return "following"
       else
@@ -194,16 +204,12 @@ class User < ActiveRecord::Base
     Follow.find_by(follower_id: id, followed_id: other_user.id, status: :blocked)
   end
 
+
   ########################### DECORATORS ###########################
 
-  #Returns the user full name
   def full_name
-    if "#{first_name} #{last_name}".length <= 20
-      "#{first_name} #{last_name}"
-    else
-      "#{first_name}"
-    end
-
+    "#{first_name} #{last_name}".length <= 20 ? 
+      "#{first_name} #{last_name}" : "#{first_name}"
   end
 
 end

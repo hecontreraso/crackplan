@@ -22,7 +22,13 @@ class Event < ActiveRecord::Base
 	belongs_to :creator, class_name: "User", inverse_of: :created_events
 
 	validates :creator_id, presence: true
-	validates :date, presence: true, timeliness: { type: :date, after: Date.today, after_message: "Events can only be created from tomorrow" }
+	validates :date, 
+    presence: true,
+    timeliness: { 
+      type: :date, 
+      after: Date.today,
+      after_message: "Events can only be created from tomorrow"
+    }
 	
 	# Avatar uploader using carrierwave
   mount_uploader :image, EventImageUploader
@@ -33,21 +39,20 @@ class Event < ActiveRecord::Base
   def get_visible_assistants(target_user)
     
     assistants = []
-    if target_user.nil? && creator.privacy == "public"
-      users.collect { |user| 
-        assistants << user if user.privacy == "public"
-      }
+    if target_user.nil? && creator.privacy.eql?("public")
+      users.collect { |user| assistants << user if user.privacy.eql?("public") }
       return assistants
     end
 
     # If I'm the creator, I can see all assistants
-    if target_user == creator
+    if target_user.eql?(creator)
       assistants = users
-    # If I'm following the creator or the creator has a public profile, I can see all assistants but private or following
-    elsif (target_user.following?(creator) || creator.privacy == "public")
+    # If I'm following the creator or the creator has a public profile, 
+    #I can see all assistants but private or following
+    elsif (target_user.following?(creator) || creator.privacy.eql?("public"))
       users.collect { |user| 
         # TODO: ORDER THIS
-        assistants << user if (user.privacy == "public" || target_user.following?(user))
+        assistants << user if (user.privacy.eql?("public") || target_user.following?(user))
       }
     end
     assistants
@@ -56,12 +61,12 @@ class Event < ActiveRecord::Base
   ########################### DECORATORS ###########################
   
   def friendly_date
-    if date == Date.today
-      return "Today"
-    elsif date == Date.tomorrow
-      return "Tomorrow"
+    if date.eql?(Date.today)
+      "Today"
+    elsif date.eql?(Date.tomorrow)
+      "Tomorrow"
     else
-      return date.strftime("%b %d")
+      date.strftime("%b %d")
     end
   end
 
