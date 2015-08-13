@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   resources :events, except: [:new]
   
   devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       get '/beta/sign_in' => 'users/sessions#internal_landing'
     end
   end
+
+  get '/users/test' => 'application#test'
 
   post '/events/:id/toggle_assistance' => 'events#toggle_assistance'
   post '/profile/:id/toggle_follow' => 'profile#toggle_follow'
